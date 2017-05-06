@@ -1,2 +1,2 @@
 ELO
-Robimy projekt.
+Robimy projekt
