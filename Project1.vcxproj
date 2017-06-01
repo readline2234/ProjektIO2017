@@ -129,6 +129,7 @@
     <ClCompile Include="Dostawa1.cpp" />
     <ClCompile Include="Dostawa2.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MenuDostawa.cpp" />
     <ClCompile Include="MenuGlowne.cpp" />
     <ClCompile Include="Przesuniecie1.cpp" />
     <ClCompile Include="Przesuniecie2.cpp" />
@@ -149,6 +150,9 @@
     <ClInclude Include="Dostawa2.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MenuDostawa.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="MenuGlowne.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -166,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Dostawa2.resx">
       <DependentUpon>Dostawa2.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuDostawa.resx">
+      <DependentUpon>MenuDostawa.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="MenuGlowne.resx">
       <DependentUpon>MenuGlowne.h</DependentUpon>

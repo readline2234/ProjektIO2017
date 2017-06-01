@@ -1,5 +1,6 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
+#include "MenuDostawa.h"
 
 namespace Project1 {
 
@@ -108,6 +109,7 @@ namespace Project1 {
 			this->textBox2->Location = System::Drawing::Point(53, 75);
 			this->textBox2->Margin = System::Windows::Forms::Padding(2);
 			this->textBox2->Name = L"textBox2";
+			this->textBox2->PasswordChar = '*';
 			this->textBox2->Size = System::Drawing::Size(137, 20);
 			this->textBox2->TabIndex = 32;
 			// 
@@ -122,7 +124,7 @@ namespace Project1 {
 			// button5
 			// 
 			this->button5->Enabled = false;
-			this->button5->Location = System::Drawing::Point(241, 11);
+			this->button5->Location = System::Drawing::Point(255, 11);
 			this->button5->Margin = System::Windows::Forms::Padding(2);
 			this->button5->Name = L"button5";
 			this->button5->Size = System::Drawing::Size(124, 19);
@@ -133,7 +135,7 @@ namespace Project1 {
 			// button4
 			// 
 			this->button4->Enabled = false;
-			this->button4->Location = System::Drawing::Point(181, 11);
+			this->button4->Location = System::Drawing::Point(195, 11);
 			this->button4->Margin = System::Windows::Forms::Padding(2);
 			this->button4->Name = L"button4";
 			this->button4->Size = System::Drawing::Size(56, 19);
@@ -151,6 +153,7 @@ namespace Project1 {
 			this->button3->TabIndex = 28;
 			this->button3->Text = L"Dostawa";
 			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &MenuGlowne::button3_Click);
 			// 
 			// button2
 			// 
@@ -158,7 +161,7 @@ namespace Project1 {
 			this->button2->Location = System::Drawing::Point(80, 11);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
-			this->button2->Size = System::Drawing::Size(97, 19);
+			this->button2->Size = System::Drawing::Size(110, 19);
 			this->button2->TabIndex = 27;
 			this->button2->Text = L"Przegl¹daj dane";
 			this->button2->UseVisualStyleBackColor = true;
@@ -190,10 +193,31 @@ namespace Project1 {
 private: System::Void butt_zaloguj_Click(System::Object^  sender, System::EventArgs^  e) {
 
 	System::String^ managedString = textBox1->Text;
-
 	msclr::interop::marshal_context context;
-	std::string standardString = context.marshal_as<std::string>(managedString);
 
+	std::string login = context.marshal_as<std::string>(managedString);
+	managedString = textBox2->Text;
+	std::string haslo = context.marshal_as<std::string>(managedString);
+
+
+	if (login == "bob")
+	{
+		if (haslo == "1234")
+		{
+			textBox1->Enabled = false;
+			textBox2->Enabled = false;
+			butt_zaloguj->Enabled = false;
+
+			button3->Enabled = true;
+			button4->Enabled = true;
+		}
+	}
+}
+
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	
+	MenuDostawa ^ menudostawa = gcnew MenuDostawa();
+	menudostawa->ShowDialog();
 }
 };
 }

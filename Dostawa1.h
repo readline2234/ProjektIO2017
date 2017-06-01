@@ -140,10 +140,15 @@ namespace Project1 {
 			this->Controls->Add(this->label1);
 			this->Name = L"Dostawa1";
 			this->Text = L"Dostawa1";
+			this->Load += gcnew System::EventHandler(this, &Dostawa1::Dostawa1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void Dostawa1_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		checkedListBox1->Items->Add(String::Format("Item {0}", 50));
+	}
+};
 }
