@@ -9,7 +9,7 @@ Debug/*
 x64/*
 #*.sdf
 #*.sln
-#*.VC.opendb
+*.VC.opendb
 #*.vcxproj*
 
 
