@@ -7,7 +7,8 @@ using namespace Project1;
 int main(void)
 {
 	std::vector<StrefaSkladowania*> vec;
-	DataBaseConnector* db = DataBaseConnector::CreateInstance("192.168.0.104", "mike", "qwerty123", "mysql");
+	//DataBaseConnector* db = DataBaseConnector::CreateInstance("192.168.0.104", "mike", "qwerty123", "mysql");
+	DataBaseConnector* db = DataBaseConnector::CreateInstance("127.0.0.1", "root", "qwerty123", "mysql");
 	db->GetStrefySkladowania(&vec);
 	for (int i = 0; i < vec.size(); i++)
 	{

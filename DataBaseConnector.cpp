@@ -83,4 +83,5 @@ bool DataBaseConnector::Connect()
 void DataBaseConnector::Disconnect()
 {
 	mysql_close(mysqlConnection);
+	mysqlConnection = mysql_init(NULL);
 }
