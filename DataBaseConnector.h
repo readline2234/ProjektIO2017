@@ -1,31 +1,26 @@
 #pragma once
+#include <stdio.h>
 #include <mysql.h>
+
 class DataBaseConnector
 {
 private: 
 	static DataBaseConnector* _instance;
 
-	DataBaseConnector();
+	MYSQL mysql;
+	const char* serverAdres;
+	const char* user;
+	const char* password;
+	const char* database;
+
+	DataBaseConnector(const char* serverAdress, const char* user, const char* password, const char* database);
 	~DataBaseConnector();
 public:
-	static DataBaseConnector* CreateInstance();
+	static DataBaseConnector* CreateInstance(const char* serverAdress, const char* user, const char* password, const char* database);
 	static DataBaseConnector* GetInstance();
 	static void DestroyInstance();
 
 private:
-
+	bool Connect();
+	void Disconnect();
 };
-
-/*
-#include <mysql.h>
-MYSQL mysql;
-
-mysql_init(&mysql); // incjalizacja
-
-if (mysql_real_connect(&mysql, "127.0.0.1", "root", "qwerty123", "mysql", 0, NULL, 0))
-printf("Po³¹czenie z baz¹ danych MySQL nawi¹zano poprawnie!\n");
-else
-printf("B³¹d po³¹czenia z baz¹ MySQL: %d, %s\n", mysql_errno(&mysql), mysql_error(&mysql));
-
-mysql_close(&mysql); // zamknij po³¹czenie
-*/
