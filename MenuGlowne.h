@@ -1,4 +1,5 @@
 #pragma once
+#include <msclr\marshal_cppstd.h>
 
 namespace Project1 {
 
@@ -34,7 +35,9 @@ namespace Project1 {
 				delete components;
 			}
 		}
-	private: System::Windows::Forms::Button^  button6;
+	private: System::Windows::Forms::Button^  butt_zaloguj;
+	protected:
+
 	protected:
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
@@ -58,7 +61,7 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			this->button6 = (gcnew System::Windows::Forms::Button());
+			this->butt_zaloguj = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->textBox2 = (gcnew System::Windows::Forms::TextBox());
@@ -69,15 +72,16 @@ namespace Project1 {
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
-			// button6
+			// butt_zaloguj
 			// 
-			this->button6->Location = System::Drawing::Point(53, 105);
-			this->button6->Margin = System::Windows::Forms::Padding(2);
-			this->button6->Name = L"button6";
-			this->button6->Size = System::Drawing::Size(56, 19);
-			this->button6->TabIndex = 35;
-			this->button6->Text = L"Zaloguj";
-			this->button6->UseVisualStyleBackColor = true;
+			this->butt_zaloguj->Location = System::Drawing::Point(53, 105);
+			this->butt_zaloguj->Margin = System::Windows::Forms::Padding(2);
+			this->butt_zaloguj->Name = L"butt_zaloguj";
+			this->butt_zaloguj->Size = System::Drawing::Size(56, 19);
+			this->butt_zaloguj->TabIndex = 35;
+			this->butt_zaloguj->Text = L"Zaloguj";
+			this->butt_zaloguj->UseVisualStyleBackColor = true;
+			this->butt_zaloguj->Click += gcnew System::EventHandler(this, &MenuGlowne::butt_zaloguj_Click);
 			// 
 			// label2
 			// 
@@ -164,7 +168,7 @@ namespace Project1 {
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(390, 197);
-			this->Controls->Add(this->button6);
+			this->Controls->Add(this->butt_zaloguj);
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->textBox2);
@@ -183,5 +187,13 @@ namespace Project1 {
 #pragma endregion
 	private: System::Void MenuGlowne_Load(System::Object^  sender, System::EventArgs^  e) {
 	}
+private: System::Void butt_zaloguj_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	System::String^ managedString = textBox1->Text;
+
+	msclr::interop::marshal_context context;
+	std::string standardString = context.marshal_as<std::string>(managedString);
+
+}
 };
 }
