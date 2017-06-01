@@ -4,9 +4,11 @@ class StrefaSkladowania
 {
 private:
 	std::string Kod;
-	StrefaSkladowania();
 public:
+	StrefaSkladowania(std::string kod);
 	~StrefaSkladowania();
+
+	std::string GetKod();
 
 	bool Edytuj(std::string kod);
 	

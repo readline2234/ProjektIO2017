@@ -1,13 +1,14 @@
 #pragma once
 #include <stdio.h>
 #include <mysql.h>
-
+#include <vector>
+#include "StrefaSkladowania.h"
 class DataBaseConnector
 {
 private: 
 	static DataBaseConnector* _instance;
 
-	MYSQL mysql;
+	MYSQL* mysqlConnection;
 	const char* serverAdres;
 	const char* user;
 	const char* password;
@@ -20,6 +21,7 @@ public:
 	static DataBaseConnector* GetInstance();
 	static void DestroyInstance();
 
+	void GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec);
 private:
 	bool Connect();
 	void Disconnect();
