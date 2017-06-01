@@ -36,6 +36,9 @@
     <ClCompile Include="StrefaSkladowania.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="DataBaseConnector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuGlowne.h">
@@ -56,6 +59,9 @@
     <ClInclude Include="StrefaSkladowania.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="DataBaseConnector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dostawa1.resx">
@@ -68,6 +74,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Przesuniecie1.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Przesuniecie2.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
