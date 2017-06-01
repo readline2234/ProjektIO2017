@@ -1,4 +1,6 @@
 #pragma once
+#include "DataBaseConnector.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace Project1 {
 
@@ -8,6 +10,8 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
+
 
 	/// <summary>
 	/// Summary for Dostawa1
@@ -148,7 +152,21 @@ namespace Project1 {
 #pragma endregion
 	private: System::Void Dostawa1_Load(System::Object^  sender, System::EventArgs^  e) {
 
-		checkedListBox1->Items->Add(String::Format("Item {0}", 50));
+		checkedListBox1->Items->Add(String::Format("Item {0}", 50));	//test
+
+		std::vector<StrefaSkladowania*> vec;
+		DataBaseConnector* db = DataBaseConnector::GetInstance();
+		db->GetStrefySkladowania(&vec);
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			std::string bufor = vec[i]->GetKod();
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			checkedListBox2->Items->Add(String::Format(result, 10));	//SK
+		}
+		
 	}
 };
 }
