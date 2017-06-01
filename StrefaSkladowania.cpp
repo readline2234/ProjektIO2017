@@ -2,13 +2,19 @@
 
 
 
-StrefaSkladowania::StrefaSkladowania()
+StrefaSkladowania::StrefaSkladowania(std::string kod)
 {
+	this->Kod = kod;
 }
 
 
 StrefaSkladowania::~StrefaSkladowania()
 {
+}
+
+std::string StrefaSkladowania::GetKod()
+{
+	return this->Kod;
 }
 
 bool StrefaSkladowania::Edytuj(std::string kod)
@@ -20,9 +26,9 @@ bool StrefaSkladowania::Edytuj(std::string kod)
 
 StrefaSkladowania* StrefaSkladowania::Dodaj(std::string kod)
 {
-	StrefaSkladowania* s = new StrefaSkladowania();
+	//StrefaSkladowania* s = new StrefaSkladowania();
 	//HERE: query do DB
-	return s;
+	return nullptr;
 }
 
 bool StrefaSkladowania::Usun(StrefaSkladowania *)

@@ -9,7 +9,7 @@ DataBaseConnector::DataBaseConnector(const char* serverAdress, const char* user,
 	this->user = user;
 	this->password = password;
 	this->database = database;
-	mysql_init(&mysql);
+	mysqlConnection = mysql_init(NULL);
 }
 
 DataBaseConnector::~DataBaseConnector()
@@ -35,18 +35,52 @@ void DataBaseConnector::DestroyInstance()
 	_instance = NULL;
 }
 
+void DataBaseConnector::GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec)
+{
+	this->Connect();
+	if (mysql_query(mysqlConnection, "SELECT * FROM mydb.strefa_skladowania;"))
+	{
+		fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | SELECT");
+	}
+	else {
+		MYSQL_RES *result = mysql_store_result(mysqlConnection);
+		if (result == NULL)
+		{
+			fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | RESULT");
+		}
+		else {
+			int num_fields = mysql_num_fields(result);
+
+			MYSQL_ROW row;
+
+			while ((row = mysql_fetch_row(result)))
+			{
+				/*for (int i = 0; i < num_fields; i++)
+				{
+					printf("%s ", row[i] ? row[i] : "NULL");
+				}
+				printf("\n");*/
+				StrefaSkladowania* s = new StrefaSkladowania(row[1]);
+				vec->push_back(s);
+			}
+			mysql_free_result(result);
+		}
+	}
+	this->Disconnect();
+}
+
 bool DataBaseConnector::Connect()
 {
-	if (mysql_real_connect(&mysql, serverAdres, user, password, database, 0, NULL, 0)) {
+	if (mysql_real_connect(mysqlConnection, serverAdres, user, password, database, 0, NULL, 0)) {
 		return true;
 	}
 	else {
-		printf("B³¹d po³¹czenia z baz¹ MySQL: %d, %s\n", mysql_errno(&mysql), mysql_error(&mysql));
+		printf("B³¹d po³¹czenia z baz¹ MySQL: %d, %s\n", mysql_errno(mysqlConnection), mysql_error(mysqlConnection));
 		return false;
 	}
 }
 
 void DataBaseConnector::Disconnect()
 {
-	mysql_close(&mysql);
+	mysql_close(mysqlConnection);
 }
