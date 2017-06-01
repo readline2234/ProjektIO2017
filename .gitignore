@@ -7,10 +7,10 @@
 .vs/*
 Debug/*
 x64/*
-*.sdf
-*.sln
-*.VC.opendb
-*.vcxproj*
+#*.sdf
+#*.sln
+#*.VC.opendb
+#*.vcxproj*
 
 
 
