@@ -64,11 +64,11 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
+			System::Windows::Forms::ListViewItem^  listViewItem5 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
 				L"#REG41",
 					L"Laptopy", L"Lenovo", L"B50-70, i5-3220, 4GB, 500GB", L"20", L"5"
 			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(5) {
+			System::Windows::Forms::ListViewItem^  listViewItem6 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(5) {
 				L"#REG41",
 					L"Klawiatury", L"HP", L"K45, membranowa, 216 klawiszy, czarna", L"24"
 			}, -1));
@@ -127,14 +127,14 @@ namespace Project1 {
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
-			listViewItem1->StateImageIndex = 0;
-			listViewItem2->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
+			listViewItem5->StateImageIndex = 0;
+			listViewItem6->StateImageIndex = 0;
+			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem5, listViewItem6 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
 			this->listView1->Name = L"listView1";
-			this->listView1->Size = System::Drawing::Size(524, 177);
+			this->listView1->Size = System::Drawing::Size(524, 191);
 			this->listView1->Sorting = System::Windows::Forms::SortOrder::Ascending;
 			this->listView1->TabIndex = 16;
 			this->listView1->UseCompatibleStateImageBehavior = false;
@@ -171,7 +171,7 @@ namespace Project1 {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(72, 254);
+			this->button2->Location = System::Drawing::Point(72, 268);
 			this->button2->Margin = System::Windows::Forms::Padding(2);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(56, 19);
@@ -181,7 +181,7 @@ namespace Project1 {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(11, 254);
+			this->button1->Location = System::Drawing::Point(11, 268);
 			this->button1->Margin = System::Windows::Forms::Padding(2);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(56, 19);
@@ -192,7 +192,7 @@ namespace Project1 {
 			// label2
 			// 
 			this->label2->AutoSize = true;
-			this->label2->Location = System::Drawing::Point(13, 57);
+			this->label2->Location = System::Drawing::Point(11, 58);
 			this->label2->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label2->Name = L"label2";
 			this->label2->Size = System::Drawing::Size(42, 13);
@@ -202,7 +202,7 @@ namespace Project1 {
 			// label1
 			// 
 			this->label1->AutoSize = true;
-			this->label1->Location = System::Drawing::Point(11, 15);
+			this->label1->Location = System::Drawing::Point(11, 9);
 			this->label1->Margin = System::Windows::Forms::Padding(2, 0, 2, 0);
 			this->label1->Name = L"label1";
 			this->label1->Size = System::Drawing::Size(82, 13);
@@ -214,7 +214,7 @@ namespace Project1 {
 			this->comboBox1->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Strefa A", L"Strefa B" });
 			this->comboBox1->FormattingEnabled = true;
 			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Strefa A", L"Strefa B" });
-			this->comboBox1->Location = System::Drawing::Point(13, 32);
+			this->comboBox1->Location = System::Drawing::Point(13, 26);
 			this->comboBox1->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox1->Name = L"comboBox1";
 			this->comboBox1->Size = System::Drawing::Size(176, 21);
