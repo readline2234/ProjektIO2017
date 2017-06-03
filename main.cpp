@@ -15,11 +15,11 @@ int main(void)
 		std::cout << "Strefa: " << vec[i]->GetKod() << std::endl;
 	}
 
-	MenuGlowne ^ menu = gcnew MenuGlowne();
-	menu->ShowDialog();
+	//MenuGlowne ^ menu = gcnew MenuGlowne();
+	//menu->ShowDialog();
 
-	//Dostawa1 ^ test = gcnew Dostawa1();
-	//test->ShowDialog();
+	Dostawa1 ^ test = gcnew Dostawa1();
+	test->ShowDialog();
 
 	system("pause");
 	return 0;

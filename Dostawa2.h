@@ -15,13 +15,17 @@ namespace Project1 {
 	public ref class Dostawa2 : public System::Windows::Forms::Form
 	{
 	public:
-		Dostawa2(void)
+		Dostawa2(CheckedListBox^ checkedlist, IEnumerator^ checked)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
+			Checkedlist = checkedlist;
+			Checked = checked;
 			//
 		}
+	CheckedListBox^ Checkedlist;
+	IEnumerator^ Checked;
 
 	protected:
 		/// <summary>
@@ -68,6 +72,7 @@ namespace Project1 {
 			this->button2->TabIndex = 16;
 			this->button2->Text = L"Anuluj";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Dostawa2::button2_Click);
 			// 
 			// button1
 			// 
@@ -110,10 +115,33 @@ namespace Project1 {
 			this->Controls->Add(this->label2);
 			this->Name = L"Dostawa2";
 			this->Text = L"Dostawa2";
+			this->Load += gcnew System::EventHandler(this, &Dostawa2::Dostawa2_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void Dostawa2_Load(System::Object^  sender, System::EventArgs^  e) {
+
+
+	}
+
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//ANULUJ
+
+	Checked->Reset();
+	Checked->MoveNext();
+
+
+	IEnumerator^ myEnum2 = Checkedlist->CheckedItems->GetEnumerator();
+	while (myEnum2->MoveNext())
+	{
+		Object^ itemChecked = safe_cast<Object^>(myEnum2->Current);
+
+		// Use the IndexOf method to get the index of an item.
+		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ", Checkedlist->GetItemCheckState(Checkedlist->Items->IndexOf(itemChecked)), "."));
+	}
+
+}
+};
 }

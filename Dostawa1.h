@@ -1,6 +1,7 @@
 #pragma once
 #include "DataBaseConnector.h"
 #include <msclr\marshal_cppstd.h>
+#include "Dostawa2.h"
 
 namespace Project1 {
 
@@ -86,6 +87,7 @@ namespace Project1 {
 			this->button1->TabIndex = 11;
 			this->button1->Text = L"Dalej";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Dostawa1::button1_Click);
 			// 
 			// checkedListBox2
 			// 
@@ -153,6 +155,8 @@ namespace Project1 {
 	private: System::Void Dostawa1_Load(System::Object^  sender, System::EventArgs^  e) {
 
 		checkedListBox1->Items->Add(String::Format("Item {0}", 50));	//test
+		//checkedListBox1->Items->Add(String::Format("Item {1}", 150));	//test
+		//checkedListBox1->Items->Add(String::Format("Item {2}", 250));	//test
 
 		std::vector<StrefaSkladowania*> vec;
 		DataBaseConnector* db = DataBaseConnector::GetInstance();
@@ -168,5 +172,37 @@ namespace Project1 {
 		}
 		
 	}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+	IEnumerator^ myEnum1 = checkedListBox1->CheckedIndices->GetEnumerator();
+	while (myEnum1->MoveNext())
+	{
+		Int32 indexChecked = *safe_cast<Int32^>(myEnum1->Current);
+
+		// The indexChecked variable contains the index of the item.
+		MessageBox::Show(String::Concat("Index#: ", indexChecked, ", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(indexChecked), "."));
+	}
+
+	// Next show the Object* title and check state for each item selected.
+	IEnumerator^ myEnum2 = checkedListBox1->CheckedItems->GetEnumerator();
+	while (myEnum2->MoveNext())
+	{
+		Object^ itemChecked = safe_cast<Object^>(myEnum2->Current);
+
+		// Use the IndexOf method to get the index of an item.
+		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(checkedListBox1->Items->IndexOf(itemChecked)), "."));
+	}
+
+	//myEnum2->Reset();
+	//myEnum2->MoveNext(); //WAZNE!!
+
+	//Dostawa2 ^ dostawa2 = gcnew Dostawa2(checkedListBox1);
+	Dostawa2 ^ dostawa2 = gcnew Dostawa2(checkedListBox1,myEnum2);
+	//dostawa2->SomeText = myEnum2;
+
+	dostawa2->ShowDialog();
+	//textBox1->Text = frm->SomeText;	//?
+}
+
 };
 }
