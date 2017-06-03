@@ -174,34 +174,33 @@ namespace Project1 {
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
-	IEnumerator^ myEnum1 = checkedListBox1->CheckedIndices->GetEnumerator();
-	while (myEnum1->MoveNext())
-	{
-		Int32 indexChecked = *safe_cast<Int32^>(myEnum1->Current);
+	//IEnumerator^ myEnum1 = checkedListBox1->CheckedIndices->GetEnumerator();
 
-		// The indexChecked variable contains the index of the item.
-		MessageBox::Show(String::Concat("Index#: ", indexChecked, ", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(indexChecked), "."));
-	}
+	//while (myEnum1->MoveNext())
+	//{
+	//	Int32 indexChecked = *safe_cast<Int32^>(myEnum1->Current);
+
+	//	// The indexChecked variable contains the index of the item.
+	//	MessageBox::Show(String::Concat("Index#: ", indexChecked, ", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(indexChecked), "."));
+	//}
 
 	// Next show the Object* title and check state for each item selected.
-	IEnumerator^ myEnum2 = checkedListBox1->CheckedItems->GetEnumerator();
-	while (myEnum2->MoveNext())
-	{
-		Object^ itemChecked = safe_cast<Object^>(myEnum2->Current);
+	IEnumerator^ WybraneDostawy = checkedListBox1->CheckedItems->GetEnumerator();
+	IEnumerator^ WybraneStrefy = checkedListBox2->CheckedItems->GetEnumerator();
 
-		// Use the IndexOf method to get the index of an item.
-		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(checkedListBox1->Items->IndexOf(itemChecked)), "."));
-	}
+	//while (WybraneDostawy->MoveNext())
+	//{
+	//	Object^ itemChecked = safe_cast<Object^>(WybraneDostawy->Current);
 
-	//myEnum2->Reset();
-	//myEnum2->MoveNext(); //WAZNE!!
+	//	// Use the IndexOf method to get the index of an item.
+	//	MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ", checkedListBox1->GetItemCheckState(checkedListBox1->Items->IndexOf(itemChecked)), "."));
+	//}
 
-	//Dostawa2 ^ dostawa2 = gcnew Dostawa2(checkedListBox1);
-	Dostawa2 ^ dostawa2 = gcnew Dostawa2(checkedListBox1,myEnum2);
-	//dostawa2->SomeText = myEnum2;
+	//myEnum2->Reset(); //myEnum2->MoveNext(); //WAZNE!!
 
+	Dostawa2 ^ dostawa2 = gcnew Dostawa2(WybraneDostawy,WybraneStrefy);
 	dostawa2->ShowDialog();
-	//textBox1->Text = frm->SomeText;	//?
+
 }
 
 };

@@ -15,17 +15,19 @@ namespace Project1 {
 	public ref class Dostawa2 : public System::Windows::Forms::Form
 	{
 	public:
-		Dostawa2(CheckedListBox^ checkedlist, IEnumerator^ checked)
+		Dostawa2(IEnumerator^ checked, IEnumerator^ checked2)
 		{
 			InitializeComponent();
 			//
 			//TODO: Add the constructor code here
-			Checkedlist = checkedlist;
+			//Checkedlist = checkedlist;
 			Checked = checked;
+			Checked2 = checked2;
 			//
 		}
 	CheckedListBox^ Checkedlist;
 	IEnumerator^ Checked;
+	IEnumerator^ Checked2;
 
 	protected:
 		/// <summary>
@@ -129,17 +131,24 @@ namespace Project1 {
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	//ANULUJ
 
-	Checked->Reset();
-	Checked->MoveNext();
+	//Checked->Reset();
+	//Checked->MoveNext();
 
 
-	IEnumerator^ myEnum2 = Checkedlist->CheckedItems->GetEnumerator();
-	while (myEnum2->MoveNext())
+	while (Checked->MoveNext())
 	{
-		Object^ itemChecked = safe_cast<Object^>(myEnum2->Current);
+		Object^ itemChecked = safe_cast<Object^>(Checked->Current);
 
 		// Use the IndexOf method to get the index of an item.
-		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ", Checkedlist->GetItemCheckState(Checkedlist->Items->IndexOf(itemChecked)), "."));
+		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
+	}
+
+	while (Checked2->MoveNext())
+	{
+		Object^ itemChecked = safe_cast<Object^>(Checked2->Current);
+
+		// Use the IndexOf method to get the index of an item.
+		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
 	}
 
 }
