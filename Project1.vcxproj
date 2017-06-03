@@ -125,15 +125,25 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Cecha.cpp" />
     <ClCompile Include="DataBaseConnector.cpp" />
+    <ClCompile Include="Dostawa.cpp" />
     <ClCompile Include="Dostawa1.cpp" />
     <ClCompile Include="Dostawa2.cpp" />
+    <ClCompile Include="Kategoria.cpp" />
+    <ClCompile Include="Klient.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuDostawa.cpp" />
     <ClCompile Include="MenuGlowne.cpp" />
     <ClCompile Include="Przesuniecie1.cpp" />
     <ClCompile Include="Przesuniecie2.cpp" />
+    <ClCompile Include="Regal.cpp" />
     <ClCompile Include="StrefaSkladowania.cpp" />
+    <ClCompile Include="Towar.cpp" />
+    <ClCompile Include="TowarCecha.cpp" />
+    <ClCompile Include="Uzytkownik.cpp" />
+    <ClCompile Include="Wydanie.cpp" />
+    <ClCompile Include="Zasob.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -143,13 +153,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Cecha.h" />
     <ClInclude Include="DataBaseConnector.h" />
+    <ClInclude Include="Dostawa.h" />
     <ClInclude Include="Dostawa1.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Dostawa2.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Kategoria.h" />
+    <ClInclude Include="Klient.h" />
     <ClInclude Include="MenuDostawa.h">
       <FileType>CppForm</FileType>
     </ClInclude>
@@ -162,7 +176,13 @@
     <ClInclude Include="Przesuniecie2.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="Regal.h" />
     <ClInclude Include="StrefaSkladowania.h" />
+    <ClInclude Include="Towar.h" />
+    <ClInclude Include="TowarCecha.h" />
+    <ClInclude Include="Uzytkownik.h" />
+    <ClInclude Include="Wydanie.h" />
+    <ClInclude Include="Zasob.h" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dostawa1.resx">

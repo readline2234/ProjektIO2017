@@ -42,6 +42,36 @@
     <ClCompile Include="MenuDostawa.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Cecha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Dostawa.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Kategoria.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Klient.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Regal.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Towar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="TowarCecha.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Uzytkownik.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Wydanie.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Zasob.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuGlowne.h">
@@ -68,6 +98,36 @@
     <ClInclude Include="MenuDostawa.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Cecha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Dostawa.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Kategoria.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Klient.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Regal.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Towar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TowarCecha.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Uzytkownik.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Wydanie.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Zasob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Dostawa1.resx">
@@ -83,6 +143,9 @@
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
     <EmbeddedResource Include="Przesuniecie2.resx">
+      <Filter>Resource Files</Filter>
+    </EmbeddedResource>
+    <EmbeddedResource Include="MenuDostawa.resx">
       <Filter>Resource Files</Filter>
     </EmbeddedResource>
   </ItemGroup>
