@@ -6,6 +6,10 @@ using namespace Project1;
 
 int main(void)
 {
+
+	//GetRegalyFromStrefa(strefa_skladowania) //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
+	//DodajDostaweDoRegalu(dostawa,regal) //bierze dostawe i regal, nic nie zwraca (ew. bool'a)
+
 	std::vector<StrefaSkladowania*> vec;
 	//DataBaseConnector* db = DataBaseConnector::CreateInstance("192.168.0.104", "mike", "qwerty123", "mysql");
 	DataBaseConnector* db = DataBaseConnector::CreateInstance("127.0.0.1", "root", "qwerty123", "mysql");
@@ -14,6 +18,8 @@ int main(void)
 	{
 		std::cout << "Strefa: " << vec[i]->GetKod() << std::endl;
 	}
+
+
 
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
 	//menu->ShowDialog();
