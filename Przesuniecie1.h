@@ -2,6 +2,7 @@
 #include "DataBaseConnector.h"
 #include <msclr\marshal_cppstd.h>
 #include "Przesuniecie2.h"
+#include "Przesuniecie1Zmiana.h"
 #include <iostream>
 
 namespace Project1 {
@@ -278,9 +279,19 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 	//int columnindex = info.Item.SubItems.IndexOf(hit.SubItem);
 	int columnindex = info->Item->SubItems->IndexOf(info->SubItem);
 
+	int number;
+
 	if (columnindex == 5)
 	{
+		Przesuniecie1Zmiana ^ przesuniecie1zmiana = gcnew Przesuniecie1Zmiana();
+		przesuniecie1zmiana->ShowDialog();
 
+		number = przesuniecie1zmiana->GetNumber();
+
+		//ListViewSubItem ^ item;  // ???
+		item->Text = "COS";
+							//trzeba tam jakos wsadzic ta wpisana wartosc
+		//info->Item->SubItems->Insert(5,);
 	}
 
 }
