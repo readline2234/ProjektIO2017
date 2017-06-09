@@ -1,4 +1,8 @@
 #pragma once
+#include "DataBaseConnector.h"
+#include <msclr\marshal_cppstd.h>
+#include "Przesuniecie2.h"
+#include <iostream>
 
 namespace Project1 {
 
@@ -8,6 +12,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Przesuniecie1
@@ -64,11 +69,11 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem5 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
+			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
 				L"#REG41",
 					L"Laptopy", L"Lenovo", L"B50-70, i5-3220, 4GB, 500GB", L"20", L"5"
 			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem6 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(5) {
+			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(5) {
 				L"#REG41",
 					L"Klawiatury", L"HP", L"K45, membranowa, 216 klawiszy, czarna", L"24"
 			}, -1));
@@ -127,9 +132,9 @@ namespace Project1 {
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
-			listViewItem5->StateImageIndex = 0;
-			listViewItem6->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem5, listViewItem6 });
+			listViewItem1->StateImageIndex = 0;
+			listViewItem2->StateImageIndex = 0;
+			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
@@ -139,6 +144,7 @@ namespace Project1 {
 			this->listView1->TabIndex = 16;
 			this->listView1->UseCompatibleStateImageBehavior = false;
 			this->listView1->View = System::Windows::Forms::View::Details;
+			this->listView1->MouseDoubleClick += gcnew System::Windows::Forms::MouseEventHandler(this, &Przesuniecie1::listView1_MouseDoubleClick);
 			// 
 			// columnHeader1
 			// 
@@ -148,26 +154,27 @@ namespace Project1 {
 			// columnHeader3
 			// 
 			this->columnHeader3->Text = L"Kategoria";
-			this->columnHeader3->Width = 83;
+			this->columnHeader3->Width = 69;
 			// 
 			// columnHeader4
 			// 
 			this->columnHeader4->Text = L"Nazwa";
-			this->columnHeader4->Width = 74;
+			this->columnHeader4->Width = 57;
 			// 
 			// columnHeader5
 			// 
 			this->columnHeader5->Text = L"Cechy";
-			this->columnHeader5->Width = 336;
+			this->columnHeader5->Width = 209;
 			// 
 			// columnHeader6
 			// 
-			this->columnHeader6->Text = L"Stan";
+			this->columnHeader6->Text = L"Dostepnoœæ";
+			this->columnHeader6->Width = 71;
 			// 
 			// columnHeader7
 			// 
 			this->columnHeader7->Text = L"Iloœæ";
-			this->columnHeader7->Width = 52;
+			this->columnHeader7->Width = 40;
 			// 
 			// button2
 			// 
@@ -236,10 +243,46 @@ namespace Project1 {
 			this->Controls->Add(this->comboBox1);
 			this->Name = L"Przesuniecie1";
 			this->Text = L"Przesuniecie1";
+			this->Load += gcnew System::EventHandler(this, &Przesuniecie1::Przesuniecie1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void Przesuniecie1_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		comboBox1->Items->Add(String::Format("Item {0}", 50));	//test
+				//checkedListBox1->Items->Add(String::Format("Item {1}", 150));	//test
+				//checkedListBox1->Items->Add(String::Format("Item {2}", 250));	//test
+
+		std::vector<StrefaSkladowania*> vec;
+		DataBaseConnector* db = DataBaseConnector::GetInstance();
+		db->GetStrefySkladowania(&vec);
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			std::string bufor = vec[i]->GetKod();
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			comboBox1->Items->Add(String::Format(result, 10));	//SK
+		}
+	}
+
+private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System::Windows::Forms::MouseEventArgs^  e) {
+	
+	Point mousepoint=e->Location;
+	ListViewHitTestInfo ^ info = listView1->HitTest(mousepoint);//->HitTest(e.X, e.Y);
+	ListViewItem ^ item = info->Item;//Item;
+
+	//int columnindex = info.Item.SubItems.IndexOf(hit.SubItem);
+	int columnindex = info->Item->SubItems->IndexOf(info->SubItem);
+
+	if (columnindex == 5)
+	{
+
+	}
+
+}
+};
 }

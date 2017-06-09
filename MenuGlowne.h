@@ -1,6 +1,7 @@
 #pragma once
 #include <msclr\marshal_cppstd.h>
 #include "MenuDostawa.h"
+#include "MenuTowar.h"
 
 namespace Project1 {
 
@@ -142,6 +143,7 @@ namespace Project1 {
 			this->button4->TabIndex = 29;
 			this->button4->Text = L"Towar";
 			this->button4->UseVisualStyleBackColor = true;
+			this->button4->Click += gcnew System::EventHandler(this, &MenuGlowne::button4_Click);
 			// 
 			// button3
 			// 
@@ -215,9 +217,14 @@ private: System::Void butt_zaloguj_Click(System::Object^  sender, System::EventA
 }
 
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
-	
+	//dostawa
 	MenuDostawa ^ menudostawa = gcnew MenuDostawa();
 	menudostawa->ShowDialog();
+}
+private: System::Void button4_Click(System::Object^  sender, System::EventArgs^  e) {
+	//towar
+	MenuTowar ^ menutowar = gcnew MenuTowar();
+	menutowar->ShowDialog();
 }
 };
 }

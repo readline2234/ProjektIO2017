@@ -72,6 +72,12 @@
     <ClCompile Include="Zasob.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="MenuTowar.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Przesuniecie1Zmiana.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="MenuGlowne.h">
@@ -126,6 +132,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Zasob.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="MenuTowar.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Przesuniecie1Zmiana.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

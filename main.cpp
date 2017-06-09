@@ -2,13 +2,13 @@
 #include "MenuGlowne.h"
 #include <vector>
 #include "DataBaseConnector.h"
+#include "Przesuniecie1.h"
+
 using namespace Project1;
 
 int main(void)
 {
 
-	//GetRegalyFromStrefa(strefa_skladowania) //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
-	//DodajDostaweDoRegalu(dostawa,regal) //bierze dostawe i regal, nic nie zwraca (ew. bool'a)
 
 	std::vector<StrefaSkladowania*> vec;
 	//DataBaseConnector* db = DataBaseConnector::CreateInstance("192.168.0.104", "mike", "qwerty123", "mysql");
@@ -24,7 +24,10 @@ int main(void)
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
 	//menu->ShowDialog();
 
-	Dostawa1 ^ test = gcnew Dostawa1();
+	//Dostawa1 ^ test = gcnew Dostawa1();
+	//test->ShowDialog();
+
+	Przesuniecie1 ^ test = gcnew Przesuniecie1();
 	test->ShowDialog();
 
 	system("pause");

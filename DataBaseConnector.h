@@ -22,6 +22,15 @@ public:
 	static void DestroyInstance();
 
 	void GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec);
+
+	//potrzebne do "Dodawanie dostawy do strefy skladowania"
+	//std::vector<Regal * > * GetRegalyFromStrefaSkladowania(StrefaSkladowania * strefa); //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
+	//void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); //bierze dostawe i regal, nic nie zwraca (ew. bool'a)
+
+	//potrzebne do "Przesuniecie wewnatrzmagazynwoe"
+	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
+	//*GetZasobyFromStrefa(StrefaSkladowania * strefa)
+
 private:
 	bool Connect();
 	void Disconnect();

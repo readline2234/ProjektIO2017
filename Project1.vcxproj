@@ -135,7 +135,9 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MenuDostawa.cpp" />
     <ClCompile Include="MenuGlowne.cpp" />
+    <ClCompile Include="MenuTowar.cpp" />
     <ClCompile Include="Przesuniecie1.cpp" />
+    <ClCompile Include="Przesuniecie1Zmiana.cpp" />
     <ClCompile Include="Przesuniecie2.cpp" />
     <ClCompile Include="Regal.cpp" />
     <ClCompile Include="StrefaSkladowania.cpp" />
@@ -170,7 +172,13 @@
     <ClInclude Include="MenuGlowne.h">
       <FileType>CppForm</FileType>
     </ClInclude>
+    <ClInclude Include="MenuTowar.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
     <ClInclude Include="Przesuniecie1.h">
+      <FileType>CppForm</FileType>
+    </ClInclude>
+    <ClInclude Include="Przesuniecie1Zmiana.h">
       <FileType>CppForm</FileType>
     </ClInclude>
     <ClInclude Include="Przesuniecie2.h">
@@ -197,8 +205,14 @@
     <EmbeddedResource Include="MenuGlowne.resx">
       <DependentUpon>MenuGlowne.h</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="MenuTowar.resx">
+      <DependentUpon>MenuTowar.h</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Przesuniecie1.resx">
       <DependentUpon>Przesuniecie1.h</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Przesuniecie1Zmiana.resx">
+      <DependentUpon>Przesuniecie1Zmiana.h</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Przesuniecie2.resx">
       <DependentUpon>Przesuniecie2.h</DependentUpon>
