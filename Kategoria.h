@@ -3,7 +3,7 @@
 class Kategoria
 {
 private:
-	std::string Nazwa;
+	std::string nazwa;
 public:
 	Kategoria(std::string nazwa);
 	~Kategoria();

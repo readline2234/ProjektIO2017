@@ -1,32 +1,32 @@
 #include "Cecha.h"
 
-Cecha::Cecha(std::string nazwa, int kategoriaid)
+Cecha::Cecha(std::string nazwa, Kategoria * kategoria)
 	{
-	this->Nazwa = nazwa;
-	this->KategoriaID = kategoriaid;
+	this->nazwa = nazwa;
+	//this->Kategoria = kategoria;
 	}
 
 Cecha::~Cecha() { }
 
-std::string Cecha::GetNazwa() { return this->Nazwa; }
-int Cecha::GetKategoriaID() { return this->GetKategoriaID(); }
+std::string Cecha::GetNazwa() { return this->nazwa; }
+Kategoria * Cecha::GetKategoria() { return this->kategoria; }
 
 bool Cecha::EdytujNazwa(std::string nazwa)
 	{
-	this->Nazwa = nazwa;
+	this->nazwa = nazwa;
 	//HERE: wyswil zapytanie do DB
 	return true;
 	}
 
-bool Cecha::EdytujKategoriaID(int kategoriaid)
+bool Cecha::EdytujKategoria(Kategoria * kategoria)
 	{
-	this->KategoriaID = kategoriaid;
+	//this->Kategoria = kategoria;
 	//HERE: wyswil zapytanie do DB
 	return true;
 	}
 
 
-Cecha* Cecha::Dodaj(std::string nazwa, int kategoriaid)
+Cecha* Cecha::Dodaj(std::string nazwa, Kategoria * kategoria)
 	{
 	//Cecha* s = new Cecha();
 	//HERE: query do DB

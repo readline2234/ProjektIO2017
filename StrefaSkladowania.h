@@ -14,8 +14,5 @@ public:
 	
 	static StrefaSkladowania* Dodaj(std::string kod);
 	static bool Usun(StrefaSkladowania *);
-private:
-
-
 };
 

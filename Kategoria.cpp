@@ -2,16 +2,16 @@
 
 Kategoria::Kategoria(std::string nazwa)
 { 
-	this->Nazwa = nazwa;
+	this->nazwa = nazwa;
 }
 
 Kategoria::~Kategoria() { }
 
-std::string Kategoria::GetNazwa() { return this->Nazwa;}
+std::string Kategoria::GetNazwa() { return this->nazwa;}
 
 bool Kategoria::EdytujNazwa(std::string nazwa)
 {
-	this->Nazwa = nazwa;
+	this->nazwa = nazwa;
 	//HERE: wyswil zapytanie do DB
 	return true;
 }

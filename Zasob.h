@@ -1,27 +1,33 @@
 #pragma once
+#include "Towar.h"
+#include "Dostawa.h"
+#include "Regal.h"
 
 class Zasob
 {
 private:
-	int TowarID;
-	int DostawaID;
-	int RegalID;
-	int Ilosc;
+	Towar * towar;
+	Dostawa * dostawa;
+	Regal * regal;
+	int ilosc;
 public:
-	Zasob(int towarid, int dostawaid, int regalid, int ilosc);
+	Zasob(Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc);
 	~Zasob();
 
-	int GetTowarID();
-	int GetDostawaID();
-	int GetRegalID();
+	Towar * GetTowar();
+	Dostawa * GetDostawa();
+	Regal * GetRegal();
 	int GetIlosc();
 
-	bool EdytujTowarID (int towarid);
-	bool EdytujDostawaID (int dostawaid);
-	bool EdytujRegalID (int regalid);
-	bool EdytujIlosc (int ilosc);
+	bool EdytujTowar(Towar * towar);
+	bool EdytujDostawa(Dostawa * dostawa);
+	bool EdytujRegal(Regal * regal);
+	bool EdytujIlosc(int ilosc);
 
-	static Zasob* Dodaj(int towarid, int dostawaid, int regalid, int ilosc);
+	bool Wydaj(int ilosc);
+	bool GenerujNaklejke();
+
+	static Zasob* Dodaj(Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc);
 	static bool Usun(Zasob *);
 };
 

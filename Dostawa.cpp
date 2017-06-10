@@ -1,61 +1,61 @@
 #include "Dostawa.h"
 
-Dostawa::Dostawa(int towarid, int ilosc, int uzytkownikid, bool rozmieszczona, int kod)
+Dostawa::Dostawa(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod)
 	{
-	this->TowarID = towarid;
-	this->Ilosc = ilosc;
+	this->towar = towar;
+	this->ilosc = ilosc;
 	//
-	this->UzytkownikID = uzytkownikid;
-	this->Rozmieszczona = rozmieszczona;
-	this->Kod = kod;
+	this->uzytkownik = uzytkownik;
+	this->rozmieszczona = rozmieszczona;
+	this->kod = kod;
 	}
 
 Dostawa::~Dostawa() { }
 
-int Dostawa::GetTowarID() { return this->TowarID; }
-int Dostawa::GetIlosc() { return this->Ilosc; }
+Towar * Dostawa::GetTowar() { return this->towar; }
+int Dostawa::GetIlosc() { return this->ilosc; }
 //
-int Dostawa::GetUzytkownikID() { return this->UzytkownikID; }
-bool Dostawa::GetRozmieszczona() { return this->Rozmieszczona; }
-int Dostawa::GetKod() { return this->Kod; }
+Uzytkownik * Dostawa::GetUzytkownik() { return this->uzytkownik; }
+bool Dostawa::GetRozmieszczona() { return this->rozmieszczona; }
+int Dostawa::GetKod() { return this->kod; }
 
-bool Dostawa::EdytujTowarID (int towarid)
+bool Dostawa::EdytujTowar (Towar * towar)
 	{
-	this->TowarID = towarid;
+	this->towar = towar;
 	//HERE: wyswil zapytanie do DB
 	return true;
 	}
 
 bool Dostawa::EdytujIlosc (int ilosc)	
 	{
-	this->Ilosc = ilosc;
+	this->ilosc = ilosc;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 
-bool Dostawa::EdytujUzytkownikID (int uzytkownikid)
+bool Dostawa::EdytujUzytkownik (Uzytkownik * uzytkownik)
 	{
-	this->UzytkownikID = uzytkownikid;
+	this->uzytkownik = uzytkownik;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 		
 bool Dostawa::EdytujRozmieszczona (int rozmieszczona)	
 	{
-	this->Rozmieszczona = rozmieszczona;
+	this->rozmieszczona = rozmieszczona;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 
 bool Dostawa::EdytujKod (int kod)	
 	{
-	this->Kod = kod;
+	this->kod = kod;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 
 	
-Dostawa* Dostawa::Dodaj(int towarid, int ilosc, int uzytkownikid, bool rozmieszczona, int kod)
+Dostawa* Dostawa::Dodaj(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod)
 	{
 	//Dostawa* s = new Dostawa();
 	//HERE: query do DB
