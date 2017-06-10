@@ -7,7 +7,7 @@ class Dostawa
 private:
 	Towar * towar;
 	int ilosc;
-	//date Data;
+	std::string Data;
 	Uzytkownik * uzytkownik;
 	bool rozmieszczona;
 	int kod;

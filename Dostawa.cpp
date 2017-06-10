@@ -15,9 +15,16 @@ Dostawa::~Dostawa() { }
 Towar * Dostawa::GetTowar() { return this->towar; }
 int Dostawa::GetIlosc() { return this->ilosc; }
 //
-Uzytkownik * Dostawa::GetUzytkownik() { return this->uzytkownik; }
-bool Dostawa::GetRozmieszczona() { return this->rozmieszczona; }
-int Dostawa::GetKod() { return this->kod; }
+Uzytkownik * Dostawa::GetUzytkownik() { 
+	return this->uzytkownik; 
+}
+
+bool Dostawa::GetRozmieszczona() { 
+	return this->rozmieszczona; 
+}
+int Dostawa::GetKod() { 
+	return this->kod; 
+}
 
 bool Dostawa::EdytujTowar (Towar * towar)
 	{
