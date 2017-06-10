@@ -126,9 +126,21 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		}
 		mysql_free_result(result);
 	}
+	char buff[500];
+	for (int i = 0; i < selectDostawy.size(); i++) {
+		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES(");
+		strcat(buff, selectDostawy[i][1]);//towar id
+		strcat(buff, ", ");
+		strcat(buff, selectDostawy[i][0]);//dostawa id
+		strcat(buff, ", ");
+		strcat(buff, KodRegalu.c_str());
+		strcat(buff, ", ");
+		strcat(buff, selectDostawy[i][2]);//ilosc
+		strcat(buff, ");");
+		mysql_query(mysqlConnection, buff);
+	}
+
 	this->Disconnect();
-
-
 }
 
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
