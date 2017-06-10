@@ -178,7 +178,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 {
 	char buff[1000];
 	strcpy(buff, "SELECT \
-		towar.ID,\
+		zasob.ID,\
 		regal.Kod,\
 		kategoria.Nazwa,\
 		towar.Producent,\
@@ -203,11 +203,11 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 		int num_fields = mysql_num_fields(result);
 		MYSQL_ROW row;
 		std::string data;
-		std::string towarID="0";
+		std::string zasobID="0";
 		while ((row = mysql_fetch_row(result)))
 		{
-			if (towarID != row[0]) {
-				towarID = row[0];
+			if (zasobID != row[0]) {
+				zasobID = row[0];
 				Regal* regal = new Regal(row[1], NULL, NULL);
 				Kategoria* kateg = new Kategoria(row[2]);
 				Towar* towar = new Towar(row[3], row[4], kateg);
@@ -227,7 +227,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 					return;
 				}
 				Cecha* cech = new Cecha(row[5], NULL);
-				vecCech->at(lastItem).push_back(cech);;
+				vecCech->at(lastItem).push_back(cech);
 			}
 		}
 		mysql_free_result(result);
