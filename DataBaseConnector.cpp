@@ -131,13 +131,26 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	}
 	char buff[500];
 	int status = 0;
+	strcpy(buff, "SELECT regal.ID FROM mydb.regal WHERE Kod = '");
+	strcat(buff, KodRegalu.c_str());
+	strcat(buff, "';");
+	std::string kodReg;
+	result = GetResult(buff);
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+		row = mysql_fetch_row(result);
+		kodReg = row[0];
+		mysql_free_result(result);
+	}
+
 	for (int i = 0; i < selectDostawyID.size(); i++) {
 		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
 		strcat(buff, selectTowarID.at(i).c_str());//towar id
 		strcat(buff, "', '");
 		strcat(buff, selectDostawyID.at(i).c_str());//dostawa id
 		strcat(buff, "', '");
-		strcat(buff, KodRegalu.c_str());
+		strcat(buff, kodReg.c_str());
 		strcat(buff, "', '");
 		strcat(buff, selectIlosc.at(i).c_str());//ilosc
 		strcat(buff, "');");
@@ -194,7 +207,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 		{
 			if (towarID != row[0]) {
 				towarID = row[0];
-
+				//Regal* regal = new Regal(row[1],)
 			}
 		}
 		mysql_free_result(result);
