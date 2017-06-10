@@ -51,4 +51,5 @@ private:
 	MYSQL_RES* GetResult(const char* SQL_QUERY);
 	bool Connect();
 	void Disconnect();
+	void ShowERR(const char* Function, const char* Message, const char* QUERY);
 };
