@@ -1,7 +1,8 @@
 #include "Zasob.h"
 
-Zasob::Zasob(Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc)
+Zasob::Zasob(int ID, Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc)
 	{
+	this->ID = ID;
 	this->towar = towar;
 	this->dostawa = dostawa;
 	this->regal = regal;
@@ -14,6 +15,11 @@ Towar * Zasob::GetTowar() { return this->towar; }
 Dostawa * Zasob::GetDostawa() { return this->dostawa; }
 Regal * Zasob::GetRegal() { return this->regal; }
 int Zasob::GetIlosc() { return this->ilosc; }
+
+int Zasob::GetID()
+{
+	return this->ID;
+}
 
 bool Zasob::EdytujTowar (Towar * towar)
 	{

@@ -195,7 +195,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 		join mydb.strefa_skladowania on(regal.Strefa_skladowania_ID = strefa_skladowania.ID)\
 	where strefa_skladowania.Kod in('");
 	strcat(buff, KodStrefa.c_str());
-	strcat(buff, "') order by towar.ID; ");
+	strcat(buff, "') order by zasob.ID; ");
 
 	this->Connect();
 	MYSQL_RES* result = GetResult(buff);
@@ -203,7 +203,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 		int num_fields = mysql_num_fields(result);
 		MYSQL_ROW row;
 		std::string data;
-		std::string zasobID="0";
+		std::string zasobID = "0";
 		while ((row = mysql_fetch_row(result)))
 		{
 			if (zasobID != row[0]) {
@@ -212,7 +212,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 				Kategoria* kateg = new Kategoria(row[2]);
 				Towar* towar = new Towar(row[3], row[4], kateg);
 				std::string il = row[6];
-				Zasob* zasob = new Zasob(towar, NULL, regal, atoi(il.c_str()));
+				Zasob* zasob = new Zasob(atoi(zasobID.c_str()),towar, NULL, regal, atoi(il.c_str()));
 				vecZas->push_back(zasob);
 				Cecha* cech = new Cecha(row[5], kateg);
 				std::vector<Cecha*> v;
