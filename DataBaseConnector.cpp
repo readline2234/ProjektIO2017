@@ -38,35 +38,44 @@ void DataBaseConnector::DestroyInstance()
 void DataBaseConnector::GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec)
 {
 	this->Connect();
-	if (mysql_query(mysqlConnection, "SELECT * FROM mydb.strefa_skladowania;"))
+
+	MYSQL_RES* result = GetResult("SELECT * FROM mydb.strefa_skladowania;");
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+
+		while ((row = mysql_fetch_row(result)))
+		{
+			/*for (int i = 0; i < num_fields; i++)
+			{
+			printf("%s ", row[i] ? row[i] : "NULL");
+			}
+			printf("\n");*/
+			StrefaSkladowania* s = new StrefaSkladowania(row[1]);
+			vec->push_back(s);
+		}
+		mysql_free_result(result);
+	}
+
+	this->Disconnect();
+}
+
+MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
+{
+	if (mysql_query(mysqlConnection, SQL_QUERY))
 	{
 		fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | SELECT");
 	}
 	else {
 		MYSQL_RES *result = mysql_store_result(mysqlConnection);
-		if (result == NULL)
-		{
+		if (result == NULL)	{
 			fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | RESULT");
 		}
 		else {
-			int num_fields = mysql_num_fields(result);
-
-			MYSQL_ROW row;
-
-			while ((row = mysql_fetch_row(result)))
-			{
-				/*for (int i = 0; i < num_fields; i++)
-				{
-					printf("%s ", row[i] ? row[i] : "NULL");
-				}
-				printf("\n");*/
-				StrefaSkladowania* s = new StrefaSkladowania(row[1]);
-				vec->push_back(s);
-			}
-			mysql_free_result(result);
+			return result;
 		}
 	}
-	this->Disconnect();
+	return NULL;
 }
 
 bool DataBaseConnector::Connect()
