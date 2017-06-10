@@ -11,6 +11,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Dostawa2
@@ -93,7 +94,6 @@ namespace Project1 {
 			// checkedListBox2
 			// 
 			this->checkedListBox2->FormattingEnabled = true;
-			this->checkedListBox2->Items->AddRange(gcnew cli::array< System::Object^  >(3) { L"Rega³ 1", L"Rega³ 2", L"Rega³ 3" });
 			this->checkedListBox2->Location = System::Drawing::Point(11, 29);
 			this->checkedListBox2->Margin = System::Windows::Forms::Padding(2);
 			this->checkedListBox2->Name = L"checkedListBox2";
@@ -143,22 +143,24 @@ namespace Project1 {
 
 		DataBaseConnector* db = DataBaseConnector::GetInstance();
 		
-		//for (int i = 0; wybranestrefy.size(); i++)
-		//{
+		for (int i = 0; i<wybranestrefy.size(); i++)
+		{
+		std::vector<Regal*> vec;
+		db->GetRegalyFromStrefaSkladowania(&vec, wybranestrefy[i]);	//poprawka
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			std::string bufor = vec[i]->GetKod();
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			checkedListBox2->Items->Add(String::Format(result, 10));	//SK
+		}
+
+		}
+
 		//std::vector<Regal*> vec;
-		////db->GetRegalyFromStrefaSkladowania(&vec,wybranestrefy[i])	//poprawka
-
-		////for (int i = 0; i < vec.size(); i++)
-		////{
-		////	std::string bufor = vec[i]->GetKod();
-		////	String^ result;
-		////	result = marshal_as<String^>(bufor);
-
-		////	checkedListBox2->Items->Add(String::Format(result, 10));	//SK
-		////}
-
-		//}
-
+		//db->GetRegalyFromStrefaSkladowania(&vec, "A2");	//poprawka
 
 	}
 

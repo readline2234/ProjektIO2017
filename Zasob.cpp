@@ -1,47 +1,56 @@
 #include "Zasob.h"
 
-Zasob::Zasob(int towarid, int dostawaid, int regalid, int ilosc)
+Zasob::Zasob(Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc)
 	{
-	this->TowarID = towarid;
-	this->DostawaID = dostawaid;
-	this->RegalID = regalid;
-	this->Ilosc = ilosc;
+	this->towar = towar;
+	this->dostawa = dostawa;
+	this->regal = regal;
+	this->ilosc = ilosc;
 	}
 
 Zasob::~Zasob() { }
 
-int Zasob::GetTowarID() { return this->TowarID; }
-int Zasob::GetDostawaID() { return this->DostawaID; }
-int Zasob::GetRegalID() { return this->RegalID; }
-int Zasob::GetIlosc() { return this->Ilosc; }
+Towar * Zasob::GetTowar() { return this->towar; }
+Dostawa * Zasob::GetDostawa() { return this->dostawa; }
+Regal * Zasob::GetRegal() { return this->regal; }
+int Zasob::GetIlosc() { return this->ilosc; }
 
-bool Zasob::EdytujTowarID (int towarid)
+bool Zasob::EdytujTowar (Towar * towar)
 	{
-	this->TowarID = towarid;
+	this->towar = towar;
 	//HERE: wyswil zapytanie do DB
 	return true;
 	}
 
-bool Zasob::EdytujDostawaID (int dostawaid)
+bool Zasob::EdytujDostawa (Dostawa * dostawa)
 	{
-	this->DostawaID = dostawaid;
+	this->dostawa = dostawa;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
-bool Zasob::EdytujRegalID (int regalid)
+bool Zasob::EdytujRegal (Regal * regal)
 	{
-	this->RegalID = regalid;
+	this->regal = regal;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 bool Zasob::EdytujIlosc (int ilosc)	
 	{
-	this->Ilosc = ilosc;
+	this->ilosc = ilosc;
 	//HERE: wyswil zapytanie do DB
 	return true;	
 	}
 	
-Zasob* Zasob::Dodaj(int towarid, int dostawaid, int regalid, int ilosc)
+	bool Wydaj(int ilosc)
+	{
+	return true;
+	}
+	
+	bool GenerujNaklejke()
+	{
+	return true;
+	}
+Zasob* Zasob::Dodaj(Towar * towar, Dostawa * dostawa, Regal * regal, int ilosc)
 	{
 	//Zasob* s = new Zasob();
 	//HERE: query do DB

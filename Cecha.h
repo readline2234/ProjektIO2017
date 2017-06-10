@@ -1,21 +1,23 @@
 #pragma once
 #include <string>
+#include "Kategoria.h"
+
 class Cecha
 {
 private:
-	std::string Nazwa;
-	int KategoriaID;
+	std::string nazwa;
+	Kategoria * kategoria;
 public:
-	Cecha(std::string nazwa, int kategoriaid);
+	Cecha(std::string nazwa, Kategoria * kategoria);
 	~Cecha();
 
 	std::string GetNazwa();
-	int GetKategoriaID();
+	Kategoria * GetKategoria();
 
 	bool EdytujNazwa(std::string nazwa);
-	bool EdytujKategoriaID(int kategoriaid);
+	bool EdytujKategoria(Kategoria * kategoria);
 
-	static Cecha* Dodaj(std::string nazwa, int kategoriaid);
+	static Cecha* Dodaj(std::string nazwa, Kategoria * kategoria);
 	static bool Usun(Cecha *);
 };
 
