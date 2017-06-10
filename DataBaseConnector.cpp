@@ -68,7 +68,7 @@ void DataBaseConnector::GetDostawy(std::vector<Dostawa*>* vec)
 		{
 			int ilosc = atoi(row[1]);
 			int kod = atoi(row[0]);
-			Dostawa* d = new Dostawa(NULL, ilosc, NULL, false, kod);
+			Dostawa* d = new Dostawa(NULL, ilosc, NULL, false, kod,row[2]);
 			vec->push_back(d);
 		}
 		mysql_free_result(result);
@@ -149,23 +149,20 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	}
 
 	for (int i = 0; i < selectDostawyID.size(); i++) {
-		strcpy(buff, "INSERT INTO mydb.zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
-		strcat(buff, selectTowarID.at(i).c_str());//towar id
-		strcat(buff, "', '");
-		strcat(buff, selectDostawyID.at(i).c_str());//dostawa id
-		strcat(buff, "', '");
-		strcat(buff, kodReg.c_str());
-		strcat(buff, "', '");
-		strcat(buff, selectIlosc.at(i).c_str());//ilosc
-		strcat(buff, "');");
-		status = mysql_query(mysqlConnection, buff);
+		status = CreateNewZasob(
+			selectTowarID.at(i).c_str(),
+			selectDostawyID.at(i).c_str(),
+			kodReg.c_str(),
+			selectIlosc.at(i).c_str()
+			);
 		if (status != 0) {
-			this->ShowERR("DodajDostaweDoRegalu", "Dodawanie do zasobow.", buff);
 			this->Disconnect();
 			return;
 		}
 	}
-	strcpy(buff, "UPDATE mydb.dostawa SET dostawa.Rozmeiszczona = b'1' WHERE dostawa.Kod = '");
+	strcpy(buff, "UPDATE mydb.dostawa\
+	SET dostawa.Rozmeiszczona = b'1'\
+	WHERE dostawa.Kod = '");
 	strcat(buff, KodDostawy.c_str());
 	strcat(buff, "';");
 	status = mysql_query(mysqlConnection,buff);
@@ -237,6 +234,114 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::ve
 	}
 
 	this->Disconnect();
+}
+
+void DataBaseConnector::PrzesunZasobNaRegal(int zasobID, std::string KodRegal,int ilosc)
+{
+	char buff[200];
+	strcpy(buff, "SELECT Ilosc FROM mydb.zasob\
+		WHERE zasob.ID =");
+	strcat(buff, std::to_string(zasobID).c_str());
+	strcat(buff, ";");
+
+	std::string data;
+	this->Connect();
+	MYSQL_RES* result = GetResult(buff);
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+		row = mysql_fetch_row(result);
+		data = row[0];
+		mysql_free_result(result);
+	}
+	else {
+		this->ShowERR("PrzesunZasobNaRegal", "Wyszukiwanie zasobu.", buff);
+		this->Disconnect();
+		return;
+	}
+	int zasobSize = atoi(data.c_str());
+	int status = 0;
+	if (zasobSize > ilosc) {
+		zasobSize -= ilosc;
+		//update ilosc stary zasob
+		strcpy(buff, "UPDATE mydb.zasob\
+			SET zasob.Ilosc =");
+		strcat(buff, std::to_string(zasobSize).c_str());
+		strcat(buff, " WHERE zasob.ID = ");
+		strcat(buff, std::to_string(zasobID).c_str());
+		strcat(buff, ";");
+		
+		status = mysql_query(mysqlConnection, buff);
+		if (status != 0) {
+			this->ShowERR("PrzesunZasobNaRegal", "Ustawienie ilosci dla istniejacego zasobu nie powiodlo sie.", buff);
+			this->Disconnect();
+			return;
+		}
+		//stworz nowy zasob z nowym regalem
+		strcpy(buff, "SELECT Towar_ID, Dostawa_ID FROM mydb.zasob\
+		WHERE zasob.ID =");
+		strcat(buff, std::to_string(zasobID).c_str());
+		strcat(buff, ";");
+
+		std::string towarID;
+		std::string dostawaID;
+
+		result = GetResult(buff);
+		if (result != NULL) {
+			int num_fields = mysql_num_fields(result);
+			MYSQL_ROW row;
+			row = mysql_fetch_row(result);
+			towarID = row[0];
+			dostawaID = row[1];
+			mysql_free_result(result);
+		}
+		else {
+			this->ShowERR("PrzesunZasobNaRegal", "Wyszukiwanie zasobu.", buff);
+			return;
+		}
+		status = this->CreateNewZasob(towarID.c_str(), dostawaID.c_str(), KodRegal.c_str(), std::to_string(ilosc).c_str());
+		if (status != 0) {
+			this->Disconnect();
+			return;
+		}
+	}
+	else {
+		//update stary zasob regal
+		strcpy(buff, "UPDATE mydb.zasob\
+			SET zasob.Regal_ID =");
+		strcat(buff, KodRegal.c_str());
+		strcat(buff, " WHERE zasob.ID = ");
+		strcat(buff, std::to_string(zasobID).c_str());
+		strcat(buff, ";");
+
+		status = mysql_query(mysqlConnection, buff);
+		if (status != 0) {
+			this->ShowERR("PrzesunZasobNaRegal", "Ustawienie nowego regalu dla istniejacego zasobu nie powiodlo sie.", buff);
+			this->Disconnect();
+			return;
+		}
+	}
+
+	this->Disconnect();
+}
+
+int DataBaseConnector::CreateNewZasob(const char * towarID, const char * dostawaID, const char * reagalKod, const char * ilosc)
+{
+	char buff[500];
+	strcpy(buff, "INSERT INTO mydb.zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
+	strcat(buff, towarID);
+	strcat(buff, "', '");
+	strcat(buff, dostawaID);
+	strcat(buff, "', '");
+	strcat(buff, reagalKod);
+	strcat(buff, "', '");
+	strcat(buff, ilosc);
+	strcat(buff, "');");
+	int st = mysql_query(mysqlConnection, buff);
+	if (st != 0) {
+		this->ShowERR("PrzesunZasobNaRegal", "Utworzenie nowego zasobu nie powiodlo sie.", buff);
+	}
+	return st;
 }
 
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)

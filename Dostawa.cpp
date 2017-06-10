@@ -1,10 +1,10 @@
 #include "Dostawa.h"
 
-Dostawa::Dostawa(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod)
+Dostawa::Dostawa(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod, std::string data)
 	{
 	this->towar = towar;
 	this->ilosc = ilosc;
-	//
+	this->Data = data;
 	this->uzytkownik = uzytkownik;
 	this->rozmieszczona = rozmieszczona;
 	this->kod = kod;
@@ -24,6 +24,11 @@ bool Dostawa::GetRozmieszczona() {
 }
 int Dostawa::GetKod() { 
 	return this->kod; 
+}
+
+std::string Dostawa::GetData()
+{
+	return this->Data;
 }
 
 bool Dostawa::EdytujTowar (Towar * towar)

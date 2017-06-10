@@ -13,7 +13,7 @@ private:
 	int kod;
 	
 public:
-	Dostawa(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod);
+	Dostawa(Towar * towar, int ilosc, Uzytkownik * uzytkownik, bool rozmieszczona, int kod, std::string data);
 	~Dostawa();
 
 	Towar * GetTowar();
@@ -22,6 +22,7 @@ public:
 	Uzytkownik * GetUzytkownik();
 	bool GetRozmieszczona();
 	int GetKod();
+	std::string GetData();
 
 	bool EdytujTowar (Towar * towar);
 	bool EdytujIlosc (int ilosc);
