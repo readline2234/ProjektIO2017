@@ -143,21 +143,21 @@ namespace Project1 {
 
 		DataBaseConnector* db = DataBaseConnector::GetInstance();
 		
-		for (int i = 0; wybranestrefy.size(); i++)
-		{
-		std::vector<Regal*> vec;
-		//db->GetRegalyFromStrefaSkladowania(&vec,wybranestrefy[i])	//poprawka
-
-		//for (int i = 0; i < vec.size(); i++)
+		//for (int i = 0; wybranestrefy.size(); i++)
 		//{
-		//	std::string bufor = vec[i]->GetKod();
-		//	String^ result;
-		//	result = marshal_as<String^>(bufor);
+		//std::vector<Regal*> vec;
+		////db->GetRegalyFromStrefaSkladowania(&vec,wybranestrefy[i])	//poprawka
 
-		//	checkedListBox2->Items->Add(String::Format(result, 10));	//SK
+		////for (int i = 0; i < vec.size(); i++)
+		////{
+		////	std::string bufor = vec[i]->GetKod();
+		////	String^ result;
+		////	result = marshal_as<String^>(bufor);
+
+		////	checkedListBox2->Items->Add(String::Format(result, 10));	//SK
+		////}
+
 		//}
-
-		}
 
 
 	}

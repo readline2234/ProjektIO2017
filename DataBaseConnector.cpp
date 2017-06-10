@@ -139,7 +139,6 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		strcat(buff, ");");
 		mysql_query(mysqlConnection, buff);
 	}
-
 	this->Disconnect();
 }
 
