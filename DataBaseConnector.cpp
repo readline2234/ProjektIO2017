@@ -143,7 +143,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		strcat(buff, "');");
 		status = mysql_query(mysqlConnection, buff);
 		if (status != 0) {
-			std::cout<<"ERROR: DodajDostaweDoRegalu("<< KodDostawy <<","<< KodRegalu<<")\n Dodawanie do zasobow.";
+			this->ShowERR("DodajDostaweDoRegalu", "Dodawanie do zasobow.", buff);
 			return;
 		}
 	}
@@ -154,7 +154,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	strcat(buff, "';");
 	status = mysql_query(mysqlConnection,buff);
 	if (status != 0) {
-		std::cout << "ERROR: DodajDostaweDoRegalu(" << KodDostawy << "," << KodRegalu << ")\n Ustawienie dostawy na status 'Rozmeiszczona = 1'.";
+		this->ShowERR("DodajDostaweDoRegalu", "Ustawienie dostawy na status 'Rozmeiszczona = 1'.", buff);
 		return;
 	}
 	this->Disconnect();
@@ -164,11 +164,11 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 {
 	char buff[200];
 	strcpy(buff, "SELECT \
-	regal.Kod as Regal,\
-		kategoria.Nazwa as Kategoria,\
+		towar.ID,\
+		regal.Kod,\
+		kategoria.Nazwa,\
 		towar.Producent,\
 		towar.Model,\
-		towar.ID as ID_towaru,\
 		cecha.Nazwa as Cecha,\
 		zasob.Ilosc\
 		FROM\
@@ -181,7 +181,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 		join mydb.strefa_skladowania on(regal.Strefa_skladowania_ID = strefa_skladowania.ID)\
 	where strefa_skladowania.Kod in('");
 	strcat(buff, KodStrefa.c_str());
-	strcat(buff, "'); ");
+	strcat(buff, "') order by towar.ID; ");
 
 	this->Connect();
 	MYSQL_RES* result = GetResult(buff);
@@ -189,11 +189,13 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 		int num_fields = mysql_num_fields(result);
 		MYSQL_ROW row;
 		std::string data;
-		std::string towarID=NULL;
+		std::string towarID="0";
 		while ((row = mysql_fetch_row(result)))
 		{
-			towarID = row[0];
-			
+			if (towarID != row[0]) {
+				towarID = row[0];
+
+			}
 		}
 		mysql_free_result(result);
 	}
@@ -235,4 +237,9 @@ void DataBaseConnector::Disconnect()
 {
 	mysql_close(mysqlConnection);
 	mysqlConnection = mysql_init(NULL);
+}
+
+void DataBaseConnector::ShowERR(const char * Function, const char * Message, const char * QUERY)
+{
+	std::cout << "ERROR: " << Function << "\nMESSAGE: " << Message << "\nQUERY: " << QUERY << std::endl;
 }
