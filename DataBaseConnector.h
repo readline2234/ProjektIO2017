@@ -38,14 +38,7 @@ public:
 	//bierze dostawe i regal, dodaje dostawe do regalu
 	//
 	//?niby jak mam to zrobic?
-	void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); 
-
-	//zwraca obiekt na podstawie kodu
-	//void GetDostawa(Dostawa *, int Kod);
-
-	//zwraca obiekt na podstawie kodu
-	//void GetRegalRegal *, ?String? Kod); 
-
+	void DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu);
 
 	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE
 	//
