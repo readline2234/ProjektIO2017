@@ -18,9 +18,9 @@ namespace Project1 {
 	{
 	public:
 
-		int number;
+		String ^ number;
 
-		int GetNumber()
+		String ^ GetNumber()
 		{
 			return number;
 		}
@@ -69,7 +69,7 @@ namespace Project1 {
 			// 
 			// button1
 			// 
-			this->button1->Location = System::Drawing::Point(40, 38);
+			this->button1->Location = System::Drawing::Point(51, 46);
 			this->button1->Name = L"button1";
 			this->button1->Size = System::Drawing::Size(75, 23);
 			this->button1->TabIndex = 0;
@@ -79,7 +79,7 @@ namespace Project1 {
 			// 
 			// button2
 			// 
-			this->button2->Location = System::Drawing::Point(121, 38);
+			this->button2->Location = System::Drawing::Point(132, 46);
 			this->button2->Name = L"button2";
 			this->button2->Size = System::Drawing::Size(75, 23);
 			this->button2->TabIndex = 1;
@@ -88,7 +88,7 @@ namespace Project1 {
 			// 
 			// textBox1
 			// 
-			this->textBox1->Location = System::Drawing::Point(68, 12);
+			this->textBox1->Location = System::Drawing::Point(79, 20);
 			this->textBox1->Name = L"textBox1";
 			this->textBox1->Size = System::Drawing::Size(100, 20);
 			this->textBox1->TabIndex = 2;
@@ -97,7 +97,7 @@ namespace Project1 {
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
-			this->ClientSize = System::Drawing::Size(235, 82);
+			this->ClientSize = System::Drawing::Size(256, 91);
 			this->Controls->Add(this->textBox1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -114,12 +114,14 @@ namespace Project1 {
 	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 		//OK
 
-		System::String^ managedString = textBox1->Text;
-		msclr::interop::marshal_context context;
+		//System::String^ managedString = textBox1->Text;
+		//msclr::interop::marshal_context context;
 
-		std::string pole = context.marshal_as<std::string>(managedString);
-		
-		number = stoi(pole);
+		//std::string pole = context.marshal_as<std::string>(managedString);
+		//
+		//number = stoi(pole);
+
+		number = textBox1->Text;;
 		
 		Przesuniecie1Zmiana::Close();
 	}
