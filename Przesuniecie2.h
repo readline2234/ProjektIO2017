@@ -1,4 +1,6 @@
 #pragma once
+#include <msclr\marshal_cppstd.h>
+#include "DataBaseConnector.h"
 
 namespace Project1 {
 
@@ -8,6 +10,7 @@ namespace Project1 {
 	using namespace System::Windows::Forms;
 	using namespace System::Data;
 	using namespace System::Drawing;
+	using namespace msclr::interop;
 
 	/// <summary>
 	/// Summary for Przesuniecie2
@@ -64,11 +67,11 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem3 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
+			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
 				L"#REG41",
 					L"20/100"
 			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem4 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
+			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
 				L"#REG42",
 					L"50/100"
 			}, -1));
@@ -88,9 +91,9 @@ namespace Project1 {
 			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->columnHeader1, this->columnHeader3 });
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
-			listViewItem3->StateImageIndex = 0;
-			listViewItem4->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem3, listViewItem4 });
+			listViewItem1->StateImageIndex = 0;
+			listViewItem2->StateImageIndex = 0;
+			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
@@ -155,7 +158,6 @@ namespace Project1 {
 			// 
 			this->comboBox1->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Strefa A", L"Strefa B" });
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Strefa A", L"Strefa B" });
 			this->comboBox1->Location = System::Drawing::Point(10, 26);
 			this->comboBox1->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox1->Name = L"comboBox1";
@@ -175,10 +177,27 @@ namespace Project1 {
 			this->Controls->Add(this->comboBox1);
 			this->Name = L"Przesuniecie2";
 			this->Text = L"Przesuniecie2";
+			this->Load += gcnew System::EventHandler(this, &Przesuniecie2::Przesuniecie2_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
 
 		}
 #pragma endregion
-	};
+	private: System::Void Przesuniecie2_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		//comboBox1->Items->Add(String::Format("Item {0}", 50));	//test
+		std::vector<StrefaSkladowania*> vec;
+		DataBaseConnector* db = DataBaseConnector::GetInstance();
+		db->GetStrefySkladowania(&vec);
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			std::string bufor = vec[i]->GetKod();
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			comboBox1->Items->Add(String::Format(result, 10));	//SK
+		}
+	}
+};
 }

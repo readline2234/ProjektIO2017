@@ -2,10 +2,14 @@
 #include "MenuGlowne.h"
 #include <vector>
 #include "DataBaseConnector.h"
+#include "Przesuniecie1.h"
+
 using namespace Project1;
 
 int main(void)
 {
+
+
 	std::vector<StrefaSkladowania*> vec;
 	//DataBaseConnector* db = DataBaseConnector::CreateInstance("192.168.0.104", "mike", "qwerty123", "mysql");
 	DataBaseConnector* db = DataBaseConnector::CreateInstance("127.0.0.1", "root", "qwerty123", "mysql");
@@ -15,11 +19,16 @@ int main(void)
 		std::cout << "Strefa: " << vec[i]->GetKod() << std::endl;
 	}
 
+
+
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
 	//menu->ShowDialog();
 
 	Dostawa1 ^ test = gcnew Dostawa1();
 	test->ShowDialog();
+
+	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
+	//test->ShowDialog();
 
 	system("pause");
 	return 0;
