@@ -45,7 +45,7 @@ public:
 	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE
 	//
 	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
-	void GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vector<std::vector<Cecha*>> vecCech, std::string KodStrefa);
+	void GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::vector<std::vector<Cecha*>>* vecCech, std::string KodStrefa);
 
 private:
 	MYSQL_RES* GetResult(const char* SQL_QUERY);

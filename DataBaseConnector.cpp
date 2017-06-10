@@ -143,6 +143,10 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		kodReg = row[0];
 		mysql_free_result(result);
 	}
+	else {
+		this->ShowERR("DodajDostaweDoRegalu", "Wyszukiwanie regalu.", buff);
+		return;
+	}
 
 	for (int i = 0; i < selectDostawyID.size(); i++) {
 		strcpy(buff, "INSERT INTO mydb.zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
@@ -157,6 +161,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		status = mysql_query(mysqlConnection, buff);
 		if (status != 0) {
 			this->ShowERR("DodajDostaweDoRegalu", "Dodawanie do zasobow.", buff);
+			this->Disconnect();
 			return;
 		}
 	}
@@ -166,12 +171,13 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	status = mysql_query(mysqlConnection,buff);
 	if (status != 0) {
 		this->ShowERR("DodajDostaweDoRegalu", "Ustawienie dostawy na status 'Rozmeiszczona = 1'.", buff);
+		this->Disconnect();
 		return;
 	}
 	this->Disconnect();
 }
 
-void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vector<std::vector<Cecha*>> vecCech, std::string KodStrefa)
+void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::vector<std::vector<Cecha*>>* vecCech, std::string KodStrefa)
 {
 	char buff[200];
 	strcpy(buff, "SELECT \
@@ -180,7 +186,7 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 		kategoria.Nazwa,\
 		towar.Producent,\
 		towar.Model,\
-		cecha.Nazwa as Cecha,\
+		cecha.Nazwa,\
 		zasob.Ilosc\
 		FROM\
 		mydb.zasob\
@@ -205,12 +211,30 @@ void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vec
 		{
 			if (towarID != row[0]) {
 				towarID = row[0];
-				//Regal* regal = new Regal(row[1],)
+				Regal* regal = new Regal(row[1], NULL, NULL);
+				Kategoria* kateg = new Kategoria(row[2]);
+				Towar* towar = new Towar(row[3], row[4], kateg);
+				std::string il = row[6];
+				Zasob* zasob = new Zasob(towar, NULL, regal, atoi(il.c_str()));
+				vecZas->push_back(zasob);
+				Cecha* cech = new Cecha(row[5], kateg);
+				std::vector<Cecha*> v;
+				v.push_back(cech);
+				vecCech->push_back(v);
+			}
+			else {
+				int lastItem = vecCech->size() - 1;
+				if (lastItem < 0) {
+					this->ShowERR("GetZasobyFromStrefa", "Wystapi³ bl¹d przy budowaniu vectora klas 'Cecha'",NULL);
+					this->Disconnect();
+					return;
+				}
+				Cecha* cech = new Cecha(row[5], NULL);
+				vecCech->at(lastItem).push_back(cech);;
 			}
 		}
 		mysql_free_result(result);
 	}
-
 
 	this->Disconnect();
 }
