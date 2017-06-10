@@ -1,6 +1,7 @@
 #pragma once
 #include "Dostawa.h"
 #include <msclr\marshal_cppstd.h>
+#include "DataBaseConnector.h"
 
 namespace Project1 {
 
@@ -127,6 +128,36 @@ namespace Project1 {
 		}
 #pragma endregion
 	private: System::Void Dostawa2_Load(System::Object^  sender, System::EventArgs^  e) {
+
+		std::vector <std::string> wybranestrefy;
+		Checked2->Reset();
+
+		while (Checked2->MoveNext())
+		{
+			String ^  kod;
+			kod = Checked2->Current->ToString();
+			msclr::interop::marshal_context context;
+			std::string skod = context.marshal_as<std::string>(kod);
+			wybranestrefy.push_back(skod);
+		}
+
+		DataBaseConnector* db = DataBaseConnector::GetInstance();
+		
+		for (int i = 0; wybranestrefy.size(); i++)
+		{
+		std::vector<Regal*> vec;
+		//db->GetRegalyFromStrefaSkladowania(&vec,wybranestrefy[i])	//poprawka
+
+		//for (int i = 0; i < vec.size(); i++)
+		//{
+		//	std::string bufor = vec[i]->GetKod();
+		//	String^ result;
+		//	result = marshal_as<String^>(bufor);
+
+		//	checkedListBox2->Items->Add(String::Format(result, 10));	//SK
+		//}
+
+		}
 
 
 	}

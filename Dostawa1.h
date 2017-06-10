@@ -102,10 +102,6 @@ namespace Project1 {
 			// 
 			this->checkedListBox1->DisplayMember = L"Name";
 			this->checkedListBox1->FormattingEnabled = true;
-			this->checkedListBox1->Items->AddRange(gcnew cli::array< System::Object^  >(3) {
-				L"#A45B - 8:00 - 20.05.2017", L"#A45C - 9:15 - 24.05.2017",
-					L"#A45D - 14:35 - 20..06.2017"
-			});
 			this->checkedListBox1->Location = System::Drawing::Point(11, 24);
 			this->checkedListBox1->Margin = System::Windows::Forms::Padding(2);
 			this->checkedListBox1->Name = L"checkedListBox1";
@@ -153,7 +149,7 @@ namespace Project1 {
 #pragma endregion
 	private: System::Void Dostawa1_Load(System::Object^  sender, System::EventArgs^  e) {
 
-		checkedListBox1->Items->Add(String::Format("Item {0}", 50));	//test
+		//checkedListBox1->Items->Add(String::Format("Item {0}", 50));	//test
 		//checkedListBox1->Items->Add(String::Format("Item {1}", 150));	//test
 		//checkedListBox1->Items->Add(String::Format("Item {2}", 250));	//test
 
@@ -169,7 +165,18 @@ namespace Project1 {
 
 			checkedListBox2->Items->Add(String::Format(result, 10));	//SK
 		}
-		
+
+		std::vector<Dostawa*> vec2;
+		db->GetDostawy(&vec2);
+
+		for (int i = 0; i < vec2.size(); i++)
+		{
+			std::string bufor = std::to_string(vec2[i]->GetKod());
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			checkedListBox1->Items->Add(String::Format(result, 10));	//SK
+		}
 	}
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 
