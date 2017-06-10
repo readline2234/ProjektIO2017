@@ -71,14 +71,6 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
-				L"#REG41",
-					L"Laptopy", L"Lenovo", L"B50-70, i5-3220, 4GB, 500GB", L"20", L"5"
-			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
-				L"#REG41",
-					L"Klawiatury", L"HP", L"K45, membranowa, 216 klawiszy, czarna", L"24", L"15"
-			}, -1));
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
@@ -104,9 +96,6 @@ namespace Project1 {
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
-			listViewItem1->StateImageIndex = 0;
-			listViewItem2->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
@@ -295,38 +284,41 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 
 	db->GetZasobyFromStrefa(&vecZas, &vecCech, sstrefa);
 
+	for (int i = 0; i < vecZas.size(); i++)
+	{
+		std::string bufor = vecZas[i]->GetRegal()->GetKod();
+		String^ result;
+		result = marshal_as<String^>(bufor);
 
+		ListViewItem ^ item1 = gcnew ListViewItem(result);
 
-	std::string bufor = vecZas[0]->GetRegal()->GetKod();
-	String^ result;
-	result = marshal_as<String^>(bufor);
+		bufor = vecZas[i]->GetTowar()->GetKategoria()->GetNazwa();
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
 
-	ListViewItem ^ item1 = gcnew ListViewItem(result);
+		bufor = vecZas[i]->GetTowar()->GetModel();
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
 
-	bufor = vecZas[0]->GetTowar()->GetKategoria()->GetNazwa();
-	result = marshal_as<String^>(bufor);
-	item1->SubItems->Add(result);
+		std::string cechy;
+		for (int j = 0; j < vecCech[i].size(); j++)
+		{
+			cechy = cechy + vecCech[i][j]->GetNazwa() + ", ";
+		}
 
-	bufor = vecZas[0]->GetTowar()->GetModel();
-	result = marshal_as<String^>(bufor);
-	item1->SubItems->Add(result);
+		bufor = cechy;
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
 
-	std::string cechy;
-	cechy = cechy + vecCech[0][0]->GetNazwa() + ", ";
-	cechy = cechy + vecCech[0][1]->GetNazwa() + ", ";
-	cechy = cechy + vecCech[0][2]->GetNazwa() + ", ";
+		bufor = std::to_string(vecZas[i]->GetIlosc());
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
 
-	bufor = cechy;
-	result = marshal_as<String^>(bufor);
-	item1->SubItems->Add(result);
+		item1->SubItems->Add("");	//miejsce na ilosc
 
-	bufor = std::to_string(vecZas[0]->GetIlosc());
-	result = marshal_as<String^>(bufor);
-	item1->SubItems->Add(result);
+		listView1->Items->Add(item1);
 
-	item1->SubItems->Add("");	//miejsce na ilosc
-
-	listView1->Items->Add(item1);
+	}
 
 	for (int i = 0; i < listView1->Items->Count; i++)
 	{
