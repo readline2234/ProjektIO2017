@@ -33,7 +33,7 @@ public:
 	//potrzebne do "Dodawanie dostawy do strefy skladowania":
 	
 	//bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
-	void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); 
+	void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, std::string KodStrefa);
 
 	//bierze dostawe i regal, dodaje dostawe do regalu
 	//
