@@ -259,6 +259,27 @@ void DataBaseConnector::PrzesunZasobNaRegal(int zasobID, std::string KodRegal,in
 		this->Disconnect();
 		return;
 	}
+	//pobranie id z kodu dla regalu
+	strcpy(buff, "SELECT ID FROM mydb.regal\
+		WHERE regal.Kod ='");
+	strcat(buff, KodRegal.c_str());
+	strcat(buff, "';");
+	std::string regalID;
+	result = GetResult(buff);
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+		row = mysql_fetch_row(result);
+		regalID = row[0];
+		mysql_free_result(result);
+	}
+	else {
+		this->ShowERR("PrzesunZasobNaRegal", "Wyszukiwanie regalu.", buff);
+		this->Disconnect();
+		return;
+	}
+
+
 	int zasobSize = atoi(data.c_str());
 	int status = 0;
 	if (zasobSize > ilosc) {
@@ -299,7 +320,7 @@ void DataBaseConnector::PrzesunZasobNaRegal(int zasobID, std::string KodRegal,in
 			this->ShowERR("PrzesunZasobNaRegal", "Wyszukiwanie zasobu.", buff);
 			return;
 		}
-		status = this->CreateNewZasob(towarID.c_str(), dostawaID.c_str(), KodRegal.c_str(), std::to_string(ilosc).c_str());
+		status = this->CreateNewZasob(towarID.c_str(), dostawaID.c_str(), regalID.c_str(), std::to_string(ilosc).c_str());
 		if (status != 0) {
 			this->Disconnect();
 			return;
@@ -308,8 +329,8 @@ void DataBaseConnector::PrzesunZasobNaRegal(int zasobID, std::string KodRegal,in
 	else {
 		//update stary zasob regal
 		strcpy(buff, "UPDATE mydb.zasob\
-			SET zasob.Regal_ID =");
-		strcat(buff, KodRegal.c_str());
+			SET zasob.Regal_ID = ");
+		strcat(buff, regalID.c_str());
 		strcat(buff, " WHERE zasob.ID = ");
 		strcat(buff, std::to_string(zasobID).c_str());
 		strcat(buff, ";");
