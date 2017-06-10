@@ -145,7 +145,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	}
 
 	for (int i = 0; i < selectDostawyID.size(); i++) {
-		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
+		strcpy(buff, "INSERT INTO mydb.zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
 		strcat(buff, selectTowarID.at(i).c_str());//towar id
 		strcat(buff, "', '");
 		strcat(buff, selectDostawyID.at(i).c_str());//dostawa id
@@ -160,9 +160,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 			return;
 		}
 	}
-	strcpy(buff, "UPDATE mydb.dostawa\
-	SET dostawa.Rozmeiszczona = '1'\
-	WHERE dostawa.Kod = '");
+	strcpy(buff, "UPDATE mydb.dostawa SET dostawa.Rozmeiszczona = b'1' WHERE dostawa.Kod = '");
 	strcat(buff, KodDostawy.c_str());
 	strcat(buff, "';");
 	status = mysql_query(mysqlConnection,buff);
