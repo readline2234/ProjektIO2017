@@ -103,43 +103,46 @@ void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, 
 
 void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu)
 {
-	/*char dostawy[200];
+	char dostawy[200];
 	strcpy(dostawy, "SELECT dostawa.ID, dostawa.Towar_ID, dostawa.Ilosc FROM mydb.dostawa where dostawa.Kod = '");
 	strcat(dostawy, KodDostawy.c_str());
 	strcat(dostawy, "';");
 
-	std::vector<char[3][50]> selectDostawy;
+	std::vector<std::string> selectDostawyID;
+	std::vector<std::string> selectTowarID;
+	std::vector<std::string> selectIlosc;
 
 	this->Connect();
 	MYSQL_RES* result = GetResult(dostawy);
 	if (result != NULL) {
 		int num_fields = mysql_num_fields(result);
 		MYSQL_ROW row;
-
+		std::string data;
 		while ((row = mysql_fetch_row(result)))
 		{
-			char dane[3][50];
-			strcpy(dane[0], row[0]);
-			strcpy(dane[1], row[1]);
-			strcpy(dane[2], row[2]);
-			selectDostawy.push_back(dane);
+			data = row[0];
+			selectDostawyID.push_back(data);
+			data = row[1];
+			selectTowarID.push_back(data);
+			data = row[2];
+			selectIlosc.push_back(data);
 		}
 		mysql_free_result(result);
 	}
 	char buff[500];
-	/*for (int i = 0; i < selectDostawy.size(); i++) {
+	for (int i = 0; i < selectDostawyID.size(); i++) {
 		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES(");
-		strcat(buff, selectDostawy[i][1]);//towar id
+		strcat(buff, selectTowarID.at(i).c_str());//towar id
 		strcat(buff, ", ");
-		strcat(buff, selectDostawy[i][0]);//dostawa id
+		strcat(buff, selectDostawyID.at(i).c_str());//dostawa id
 		strcat(buff, ", ");
 		strcat(buff, KodRegalu.c_str());
 		strcat(buff, ", ");
-		strcat(buff, selectDostawy[i][2]);//ilosc
+		strcat(buff, selectIlosc.at(i).c_str());//ilosc
 		strcat(buff, ");");
 		mysql_query(mysqlConnection, buff);
 	}
-	this->Disconnect();*/
+	this->Disconnect();
 }
 
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
