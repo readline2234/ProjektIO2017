@@ -1,8 +1,11 @@
 #pragma once
 #include <stdio.h>
+#include <stdlib.h>
 #include <mysql.h>
 #include <vector>
 #include "StrefaSkladowania.h"
+#include "Dostawa.h"
+#include "Regal.h"
 class DataBaseConnector
 {
 private: 
@@ -21,24 +24,27 @@ public:
 	static DataBaseConnector* GetInstance();
 	static void DestroyInstance();
 
+	
 	void GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec);
+	
+	//zwraca wektor wszystkich dostaw
+	void GetDostawy(std::vector<Dostawa*>* vec);
 
 	//potrzebne do "Dodawanie dostawy do strefy skladowania":
-
-	//void GetDostawy(std::vector<Dostawa*>* vec);
-	//zwraca wektor wszystkich dostaw
-
-	//void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); 
+	
 	//bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
+	void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); 
 
-	//void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); 
 	//bierze dostawe i regal, dodaje dostawe do regalu
+	//
+	//?niby jak mam to zrobic?
+	void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); 
 
+	//zwraca obiekt na podstawie kodu
 	//void GetDostawa(Dostawa *, int Kod);
-	//zwraca obiekt na podstawie kodu
 
-	//void GetRegalRegal *, ?String? Kod); 
 	//zwraca obiekt na podstawie kodu
+	//void GetRegalRegal *, ?String? Kod); 
 
 
 	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE

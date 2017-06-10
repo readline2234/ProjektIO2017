@@ -1,4 +1,10 @@
 #pragma once
+/**
+*	Konstruktor posiada niepotrzebne pola: towarid, uzytkownikid
+*	Pole kod powinno byc typu char* lub string bo niekoniecznie kod musi byc liczba
+*	Brakuje pola Data (mysle ze mozna stworzyc nowa klase reprezentujaca Date albo poprostu dac jako typ char* lub string)
+**/
+
 
 class Dostawa
 {

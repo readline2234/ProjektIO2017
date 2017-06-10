@@ -46,11 +46,6 @@ void DataBaseConnector::GetStrefySkladowania(std::vector<StrefaSkladowania*>* ve
 
 		while ((row = mysql_fetch_row(result)))
 		{
-			/*for (int i = 0; i < num_fields; i++)
-			{
-			printf("%s ", row[i] ? row[i] : "NULL");
-			}
-			printf("\n");*/
 			StrefaSkladowania* s = new StrefaSkladowania(row[1]);
 			vec->push_back(s);
 		}
@@ -58,6 +53,58 @@ void DataBaseConnector::GetStrefySkladowania(std::vector<StrefaSkladowania*>* ve
 	}
 
 	this->Disconnect();
+}
+
+void DataBaseConnector::GetDostawy(std::vector<Dostawa*>* vec)
+{
+	this->Connect();
+
+	MYSQL_RES* result = GetResult("SELECT Kod,sum(Ilosc),Data FROM mydb.dostawa where dostawa.Rozmeiszczona = '0' group by Kod;");
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+
+		while ((row = mysql_fetch_row(result)))
+		{
+			int ilosc = atoi(row[1]);
+			int kod = atoi(row[0]);
+			Dostawa* d = new Dostawa(NULL, ilosc, NULL, false, kod);
+			vec->push_back(d);
+		}
+		mysql_free_result(result);
+	}
+
+	this->Disconnect();
+}
+
+void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, StrefaSkladowania * strefa)
+{
+	char buff[200];
+	strcpy(buff, "SELECT regal.Kod, regal.Pojemnosc FROM strefa_skladowania JOIN regal ON(strefa_skladowania.ID = regal.Strefa_skladowania_ID) WHERE strefa_skladowania.Kod = '");
+	std::string s = strefa->GetKod();
+	strcat(buff, s.c_str());
+	strcat(buff, "';");
+	
+	this->Connect();
+	MYSQL_RES* result = GetResult(buff);
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+
+		while ((row = mysql_fetch_row(result)))
+		{
+			Regal* r = new Regal(row[0], atoi(row[1]),NULL);
+			vec->push_back(r);
+		}
+		mysql_free_result(result);
+	}
+
+	this->Disconnect();
+}
+
+void DataBaseConnector::DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
+{
+
 }
 
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
