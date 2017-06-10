@@ -77,12 +77,11 @@ void DataBaseConnector::GetDostawy(std::vector<Dostawa*>* vec)
 	this->Disconnect();
 }
 
-void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, StrefaSkladowania * strefa)
+void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, std::string KodStrefa)
 {
 	char buff[200];
 	strcpy(buff, "SELECT regal.Kod, regal.Pojemnosc FROM strefa_skladowania JOIN regal ON(strefa_skladowania.ID = regal.Strefa_skladowania_ID) WHERE strefa_skladowania.Kod = '");
-	std::string s = strefa->GetKod();
-	strcat(buff, s.c_str());
+	strcat(buff, KodStrefa.c_str());
 	strcat(buff, "';");
 	
 	this->Connect();
