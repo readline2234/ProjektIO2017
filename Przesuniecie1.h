@@ -71,14 +71,6 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
-				L"#REG41",
-					L"Laptopy", L"Lenovo", L"B50-70, i5-3220, 4GB, 500GB", L"20", L"5"
-			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
-				L"#REG41",
-					L"Klawiatury", L"HP", L"K45, membranowa, 216 klawiszy, czarna", L"24", L"15"
-			}, -1));
 			this->listView1 = (gcnew System::Windows::Forms::ListView());
 			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
@@ -104,9 +96,6 @@ namespace Project1 {
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
-			listViewItem1->StateImageIndex = 0;
-			listViewItem2->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
@@ -280,12 +269,61 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	//OK
-
 	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2();
 	przesuniecie2->ShowDialog();
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	//wyswietl
+	DataBaseConnector* db = DataBaseConnector::GetInstance();
+	std::vector<Zasob*> vecZas;
+	std::vector<std::vector<Cecha*>> vecCech;
+
+	String^ strefa = comboBox1->Text;
+	msclr::interop::marshal_context context;
+	std::string sstrefa = context.marshal_as<std::string>(strefa);
+
+	db->GetZasobyFromStrefa(&vecZas, &vecCech, sstrefa);
+
+	for (int i = 0; i < vecZas.size(); i++)
+	{
+		std::string bufor = vecZas[i]->GetRegal()->GetKod();
+		String^ result;
+		result = marshal_as<String^>(bufor);
+
+		ListViewItem ^ item1 = gcnew ListViewItem(result);
+
+		bufor = vecZas[i]->GetTowar()->GetKategoria()->GetNazwa();
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
+
+		bufor = vecZas[i]->GetTowar()->GetModel();
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
+
+		std::string cechy;
+		for (int j = 0; j < vecCech[i].size(); j++)
+		{
+			cechy = cechy + vecCech[i][j]->GetNazwa() + ", ";
+		}
+
+		bufor = cechy;
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
+
+		bufor = std::to_string(vecZas[i]->GetIlosc());
+		result = marshal_as<String^>(bufor);
+		item1->SubItems->Add(result);
+
+		item1->SubItems->Add("");	//miejsce na ilosc
+
+		listView1->Items->Add(item1);
+
+	}
+
+	for (int i = 0; i < listView1->Items->Count; i++)
+	{
+		listView1->Items[i]->SubItems[5]->Text = "0";
+	}
 
 	//comboBox1
 }
