@@ -130,17 +130,32 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		mysql_free_result(result);
 	}
 	char buff[500];
+	int status = 0;
 	for (int i = 0; i < selectDostawyID.size(); i++) {
-		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES(");
+		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES('");
 		strcat(buff, selectTowarID.at(i).c_str());//towar id
-		strcat(buff, ", ");
+		strcat(buff, "', '");
 		strcat(buff, selectDostawyID.at(i).c_str());//dostawa id
-		strcat(buff, ", ");
+		strcat(buff, "', '");
 		strcat(buff, KodRegalu.c_str());
-		strcat(buff, ", ");
+		strcat(buff, "', '");
 		strcat(buff, selectIlosc.at(i).c_str());//ilosc
-		strcat(buff, ");");
-		mysql_query(mysqlConnection, buff);
+		strcat(buff, "');");
+		status = mysql_query(mysqlConnection, buff);
+		if (status != 0) {
+			std::cout<<"ERROR: DodajDostaweDoRegalu("<< KodDostawy <<","<< KodRegalu<<")\n Dodawanie do zasobow.";
+			return;
+		}
+	}
+	strcpy(buff, "UPDATE mydb.dostawa\
+	SET dostawa.Rozmeiszczona = '1'\
+	WHERE dostawa.Kod = '");
+	strcat(buff, KodDostawy.c_str());
+	strcat(buff, "';");
+	status = mysql_query(mysqlConnection,buff);
+	if (status != 0) {
+		std::cout << "ERROR: DodajDostaweDoRegalu(" << KodDostawy << "," << KodRegalu << ")\n Ustawienie dostawy na status 'Rozmeiszczona = 1'.";
+		return;
 	}
 	this->Disconnect();
 }

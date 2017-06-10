@@ -1,6 +1,7 @@
 #pragma once
 #include <stdio.h>
 #include <stdlib.h>
+#include <iostream>
 #include <mysql.h>
 #include <vector>
 #include "StrefaSkladowania.h"
