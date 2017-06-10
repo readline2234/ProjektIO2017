@@ -42,12 +42,12 @@ public:
 	//bierze dostawe i regal, dodaje dostawe do regalu
 	void DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu);
 
-	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE
-	//
-	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
+	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": 
 	void GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::vector<std::vector<Cecha*>>* vecCech, std::string KodStrefa);
 
+	void PrzesunZasobNaRegal(int zasobID, std::string KodRegal,int ilosc);
 private:
+	int CreateNewZasob(const char* towarID, const char* dostawaID, const char* reagalKod, const char* ilosc);
 	MYSQL_RES* GetResult(const char* SQL_QUERY);
 	bool Connect();
 	void Disconnect();

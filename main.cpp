@@ -24,7 +24,7 @@ int main(void)
 	{
 		std::cout << "Regal: " << vec2[i]->GetKod() << std::endl;
 	}
-
+	
 
 
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
