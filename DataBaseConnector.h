@@ -23,15 +23,25 @@ public:
 
 	void GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec);
 
-	//potrzebne do "Dodawanie dostawy do strefy skladowania"
+	//potrzebne do "Dodawanie dostawy do strefy skladowania":
+
 	//void GetDostawy(std::vector<Dostawa*>* vec);
-	//void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
-	//void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); //bierze dostawe i regal, nic nie zwraca (ew. bool'a)
-	//Dostawa * GetDostawa(int Kod);
-	//Regal * GetRegal(?String? Kod); 
+	//zwraca wektor wszystkich dostaw
+
+	//void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); 
+	//bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
+
+	//void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); 
+	//bierze dostawe i regal, dodaje dostawe do regalu
+
+	//void GetDostawa(Dostawa *, int Kod);
+	//zwraca obiekt na podstawie kodu
+
+	//void GetRegalRegal *, ?String? Kod); 
+	//zwraca obiekt na podstawie kodu
 
 
-	//potrzebne do "Przesuniecie wewnatrzmagazynwoe"
+	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE
 	//
 	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
 	//*GetZasobyFromStrefa(StrefaSkladowania * strefa)

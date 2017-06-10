@@ -1,4 +1,5 @@
 #pragma once
+#include "Dostawa.h"
 
 namespace Project1 {
 
@@ -170,9 +171,16 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	else
 	{	
 		Checked->Reset();
-		Checked->MoveNext();
 
-		
+		//std::vector <Dostawa *> * DostawaVec;
+		//std::vector <String^> * DostawaNazwaVec;
+
+		while (Checked->MoveNext())
+		{
+		String ^  kod;
+		kod = Checked->Current->ToString();
+		}
+
 		//musisz miec obiekty wybranych dostaw
 		// oraz obiekty wybranych regalow
 		//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
