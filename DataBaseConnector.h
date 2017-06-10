@@ -6,6 +6,8 @@
 #include "StrefaSkladowania.h"
 #include "Dostawa.h"
 #include "Regal.h"
+#include "Zasob.h"
+#include "Cecha.h"
 
 #define _CRT_SECURE_NO_WARNINGS
 class DataBaseConnector
@@ -33,19 +35,16 @@ public:
 	void GetDostawy(std::vector<Dostawa*>* vec);
 
 	//potrzebne do "Dodawanie dostawy do strefy skladowania":
-	
 	//bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
 	void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, std::string KodStrefa);
 
 	//bierze dostawe i regal, dodaje dostawe do regalu
-	//
-	//?niby jak mam to zrobic?
 	void DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu);
 
 	//potrzebne do "Przesuniecie wewnatrzmagazynwoe": NIE DOKOÑCZONE JESZCZE
 	//
 	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
-	//*GetZasobyFromStrefa(StrefaSkladowania * strefa)
+	void GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vector<std::vector<Cecha*>> vecCech, std::string KodStrefa);
 
 private:
 	MYSQL_RES* GetResult(const char* SQL_QUERY);

@@ -145,6 +145,48 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 	this->Disconnect();
 }
 
+void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*> vecZas, std::vector<std::vector<Cecha*>> vecCech, std::string KodStrefa)
+{
+	char buff[200];
+	strcpy(buff, "SELECT \
+	regal.Kod as Regal,\
+		kategoria.Nazwa as Kategoria,\
+		towar.Producent,\
+		towar.Model,\
+		towar.ID as ID_towaru,\
+		cecha.Nazwa as Cecha,\
+		zasob.Ilosc\
+		FROM\
+		mydb.zasob\
+		join mydb.towar on(zasob.Towar_ID = towar.ID)\
+		join mydb.kategoria on(towar.Kategoria_ID = kategoria.ID)\
+		join mydb.regal on(regal.ID = zasob.Regal_ID)\
+		join mydb.towar_cecha on(towar_cecha.Towar_ID = towar.ID)\
+		join mydb.cecha on(cecha.ID = towar_cecha.Cecha_ID)\
+		join mydb.strefa_skladowania on(regal.Strefa_skladowania_ID = strefa_skladowania.ID)\
+	where strefa_skladowania.Kod in('");
+	strcat(buff, KodStrefa.c_str());
+	strcat(buff, "'); ");
+
+	this->Connect();
+	MYSQL_RES* result = GetResult(buff);
+	if (result != NULL) {
+		int num_fields = mysql_num_fields(result);
+		MYSQL_ROW row;
+		std::string data;
+		std::string towarID=NULL;
+		while ((row = mysql_fetch_row(result)))
+		{
+			towarID = row[0];
+			
+		}
+		mysql_free_result(result);
+	}
+
+
+	this->Disconnect();
+}
+
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
 {
 	if (mysql_query(mysqlConnection, SQL_QUERY))
