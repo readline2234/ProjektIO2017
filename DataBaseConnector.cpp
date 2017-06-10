@@ -104,30 +104,30 @@ void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, 
 
 void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu)
 {
-	char dostawy[200];
-	strcpy(dostawy, "SELECT dostawa.ID, dostawa.Towar_ID, dostawa.Ilosc FROM mydb.dostawa where dostawa.Kod = '");
-	strcat(dostawy, KodDostawy.c_str());
-	strcat(dostawy, "';");
+	//char dostawy[200];
+	//strcpy(dostawy, "SELECT dostawa.ID, dostawa.Towar_ID, dostawa.Ilosc FROM mydb.dostawa where dostawa.Kod = '");
+	//strcat(dostawy, KodDostawy.c_str());
+	//strcat(dostawy, "';");
 
-	std::vector<char[3][50]> selectDostawy;
+	//std::vector<char[3][50]> selectDostawy;
 
-	this->Connect();
-	MYSQL_RES* result = GetResult(dostawy);
-	if (result != NULL) {
-		int num_fields = mysql_num_fields(result);
-		MYSQL_ROW row;
+	//this->Connect();
+	//MYSQL_RES* result = GetResult(dostawy);
+	//if (result != NULL) {
+	//	int num_fields = mysql_num_fields(result);
+	//	MYSQL_ROW row;
 
-		while ((row = mysql_fetch_row(result)))
-		{
-			char dane[3][50];
-			strcpy(dane[0], row[0]);
-			strcpy(dane[1], row[1]);
-			strcpy(dane[2], row[2]);
-			selectDostawy.push_back(dane);
-		}
-		mysql_free_result(result);
-	}
-	this->Disconnect();
+	//	while ((row = mysql_fetch_row(result)))
+	//	{
+	//		char dane[3][50];
+	//		strcpy(dane[0], row[0]);
+	//		strcpy(dane[1], row[1]);
+	//		strcpy(dane[2], row[2]);
+	//		selectDostawy.push_back(dane);
+	//	}
+	//	mysql_free_result(result);
+	//}
+	//this->Disconnect();
 
 
 }
