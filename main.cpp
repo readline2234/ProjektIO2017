@@ -25,13 +25,14 @@ int main(void)
 		std::cout << "Regal: " << vec2[i]->GetKod() << std::endl;
 	}
 
+	db->DodajDostaweDoRegalu("1", "S1");
 
 
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
 	//menu->ShowDialog();
 
-	Dostawa1 ^ test = gcnew Dostawa1();
-	test->ShowDialog();
+	//Dostawa1 ^ test = gcnew Dostawa1();
+	//test->ShowDialog();
 
 	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
 	//test->ShowDialog();

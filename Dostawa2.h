@@ -159,9 +159,6 @@ namespace Project1 {
 
 		}
 
-		//std::vector<Regal*> vec;
-		//db->GetRegalyFromStrefaSkladowania(&vec, "A2");	//poprawka
-
 	}
 
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -241,9 +238,11 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 		//DOSTAWY	- vector - DostawaNazwaVec
 		//REGAL		- string - Regal
 
+	DataBaseConnector* db = DataBaseConnector::GetInstance();
+
 		for (int i = 0; i < DostawaNazwaVec.size(); i++)
 		{
-			//DodajDostaweDoRegalu(String KodDostawy, String KodRegalu)
+			db->DodajDostaweDoRegalu(DostawaNazwaVec[i], Regal);
 		}
 
 		//ewentualnie na obiektach:
