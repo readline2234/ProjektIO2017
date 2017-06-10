@@ -28,14 +28,14 @@ int main(void)
 	//db->DodajDostaweDoRegalu("1", "S1");
 
 
-	MenuGlowne ^ menu = gcnew MenuGlowne();
-	menu->ShowDialog();
+	//MenuGlowne ^ menu = gcnew MenuGlowne();
+	//menu->ShowDialog();
 
 	//Dostawa1 ^ test = gcnew Dostawa1();
 	//test->ShowDialog();
 
-	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
-	//test->ShowDialog();
+	Przesuniecie1 ^ test = gcnew Przesuniecie1();
+	test->ShowDialog();
 
 	system("pause");
 	return 0;

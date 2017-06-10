@@ -179,7 +179,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 
 void DataBaseConnector::GetZasobyFromStrefa(std::vector<Zasob*>* vecZas, std::vector<std::vector<Cecha*>>* vecCech, std::string KodStrefa)
 {
-	char buff[200];
+	char buff[1000];
 	strcpy(buff, "SELECT \
 		towar.ID,\
 		regal.Kod,\

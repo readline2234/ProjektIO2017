@@ -280,12 +280,58 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	//OK
-
 	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2();
 	przesuniecie2->ShowDialog();
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	//wyswietl
+	DataBaseConnector* db = DataBaseConnector::GetInstance();
+	std::vector<Zasob*> vecZas;
+	std::vector<std::vector<Cecha*>> vecCech;
+
+	String^ strefa = comboBox1->Text;
+	msclr::interop::marshal_context context;
+	std::string sstrefa = context.marshal_as<std::string>(strefa);
+
+	db->GetZasobyFromStrefa(&vecZas, &vecCech, sstrefa);
+
+
+
+	std::string bufor = vecZas[0]->GetRegal()->GetKod();
+	String^ result;
+	result = marshal_as<String^>(bufor);
+
+	ListViewItem ^ item1 = gcnew ListViewItem(result);
+
+	bufor = vecZas[0]->GetTowar()->GetKategoria()->GetNazwa();
+	result = marshal_as<String^>(bufor);
+	item1->SubItems->Add(result);
+
+	bufor = vecZas[0]->GetTowar()->GetModel();
+	result = marshal_as<String^>(bufor);
+	item1->SubItems->Add(result);
+
+	std::string cechy;
+	cechy = cechy + vecCech[0][0]->GetNazwa() + ", ";
+	cechy = cechy + vecCech[0][1]->GetNazwa() + ", ";
+	cechy = cechy + vecCech[0][2]->GetNazwa() + ", ";
+
+	bufor = cechy;
+	result = marshal_as<String^>(bufor);
+	item1->SubItems->Add(result);
+
+	bufor = std::to_string(vecZas[0]->GetIlosc());
+	result = marshal_as<String^>(bufor);
+	item1->SubItems->Add(result);
+
+	item1->SubItems->Add("");	//miejsce na ilosc
+
+	listView1->Items->Add(item1);
+
+	for (int i = 0; i < listView1->Items->Count; i++)
+	{
+		listView1->Items[i]->SubItems[5]->Text = "0";
+	}
 
 	//comboBox1
 }
