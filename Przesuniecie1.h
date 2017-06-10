@@ -21,6 +21,7 @@ namespace Project1 {
 	public ref class Przesuniecie1 : public System::Windows::Forms::Form
 	{
 	public:
+
 		Przesuniecie1(void)
 		{
 			InitializeComponent();
@@ -42,7 +43,6 @@ namespace Project1 {
 		}
 
 	protected:
-
 
 	private: System::Windows::Forms::ListView^  listView1;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader1;
@@ -269,6 +269,30 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	//OK
+	std::vector <int> DoPrzekazania;
+	std::vector <int> ID;
+
+	DataBaseConnector* db = DataBaseConnector::GetInstance();
+	std::vector<Zasob*> vecZas;
+	std::vector<std::vector<Cecha*>> vecCech;
+	String^ strefa = comboBox1->Text;
+	msclr::interop::marshal_context context;
+	std::string sstrefa = context.marshal_as<std::string>(strefa);
+	db->GetZasobyFromStrefa(&vecZas, &vecCech, sstrefa);
+
+	for (int i = 0; i < listView1->Items->Count; i++)
+	{
+		msclr::interop::marshal_context context;
+		std::string wartosc = context.marshal_as<std::string>(listView1->Items[i]->SubItems[5]->Text);
+
+		if (wartosc != "0")
+		{
+			DoPrzekazania.push_back(i);
+			ID.push_back(vecZas[i]->GetID());
+		}
+	}
+
+
 	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2();
 	przesuniecie2->ShowDialog();
 }
@@ -283,6 +307,8 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 	std::string sstrefa = context.marshal_as<std::string>(strefa);
 
 	db->GetZasobyFromStrefa(&vecZas, &vecCech, sstrefa);
+
+	listView1->Items->Clear(); //usuwanie poprzednich wierszy
 
 	for (int i = 0; i < vecZas.size(); i++)
 	{
@@ -317,13 +343,18 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 		item1->SubItems->Add("");	//miejsce na ilosc
 
 		listView1->Items->Add(item1);
-
 	}
 
 	for (int i = 0; i < listView1->Items->Count; i++)
 	{
 		listView1->Items[i]->SubItems[5]->Text = "0";
 	}
+
+
+
+
+
+
 
 	//comboBox1
 }

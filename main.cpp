@@ -36,8 +36,8 @@ int main(void)
 	//Dostawa1 ^ test = gcnew Dostawa1();
 	//test->ShowDialog();
 
-	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
-	//test->ShowDialog();
+	Przesuniecie1 ^ test = gcnew Przesuniecie1();
+	test->ShowDialog();
 
 	system("pause");
 	return 0;
