@@ -1,5 +1,6 @@
 #pragma once
 #include "Dostawa.h"
+#include <msclr\marshal_cppstd.h>
 
 namespace Project1 {
 
@@ -156,6 +157,8 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	//OK
+
+	#pragma region //Zliczanie ilosci wybranych regalow, jezeli mniejsz ed 2 to:
 	IEnumerator^ WybraneRegaly = checkedListBox2->CheckedItems->GetEnumerator();
 
 	int licznik = 0;
@@ -168,21 +171,49 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	{
 		MessageBox::Show("Wybrales wiecej niz 2 regaly - Popraw");
 	}
+
+#pragma endregion
+
 	else
 	{	
+
+	#pragma region //czesc odpowiedzialna za dostawy
+
 		Checked->Reset();
 
-		//std::vector <Dostawa *> * DostawaVec;
-		//std::vector <String^> * DostawaNazwaVec;
+		std::vector <std::string> DostawaNazwaVec;
 
 		while (Checked->MoveNext())
 		{
 		String ^  kod;
 		kod = Checked->Current->ToString();
+		msclr::interop::marshal_context context;
+		std::string skod = context.marshal_as<std::string>(kod);
+		DostawaNazwaVec.push_back(skod);
+		}
+#pragma endregion
+
+	#pragma region //czesc odpowiedzialna za regaly
+		IEnumerator^ WybraneRegaly = checkedListBox2->CheckedItems->GetEnumerator();
+		WybraneRegaly->MoveNext();
+
+		String ^  kod;
+		kod = WybraneRegaly->Current->ToString();
+		msclr::interop::marshal_context context;
+		std::string Regal = context.marshal_as<std::string>(kod);
+
+
+#pragma endregion
+
+		//DOSTAWY	- vector - DostawaNazwaVec
+		//REGAL		- string - Regal
+
+		for (int i = 0; i < DostawaNazwaVec.size(); i++)
+		{
+			//DodajDostaweDoRegalu(String KodDostawy, String KodRegalu)
 		}
 
-		//musisz miec obiekty wybranych dostaw
-		// oraz obiekty wybranych regalow
+		//ewentualnie na obiektach:
 		//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
 	}
 
