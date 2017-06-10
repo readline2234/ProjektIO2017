@@ -24,13 +24,9 @@ int main(void)
 	{
 		std::cout << "Regal: " << vec2[i]->GetKod() << std::endl;
 	}
-<<<<<<< HEAD
-	
-=======
-
-	//db->DodajDostaweDoRegalu("1", "S1");
->>>>>>> 5372bc127a1bd4552ab737c5f588c8e7ae891e22
-
+	std::vector<Zasob*> vecZas;
+	std::vector<std::vector<Cecha*>> vecCech;
+	db->GetZasobyFromStrefa(&vecZas, &vecCech, "A1");
 
 	MenuGlowne ^ menu = gcnew MenuGlowne();
 	menu->ShowDialog();
