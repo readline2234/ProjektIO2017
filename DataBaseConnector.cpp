@@ -165,7 +165,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 			return;
 		}
 	}
-	strcpy(buff, "UPDATE mydb.dostawa\
+	strcpy(buff, "SET SQL_SAFE_UPDATES = 0;UPDATE mydb.dostawa\
 	SET dostawa.Rozmeiszczona = '1'\
 	WHERE dostawa.Kod = '");
 	strcat(buff, KodDostawy.c_str());
