@@ -24,10 +24,15 @@ public:
 	void GetStrefySkladowania(std::vector<StrefaSkladowania*>* vec);
 
 	//potrzebne do "Dodawanie dostawy do strefy skladowania"
-	//std::vector<Regal * > * GetRegalyFromStrefaSkladowania(StrefaSkladowania * strefa); //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
+	//void GetDostawy(std::vector<Dostawa*>* vec);
+	//void GetRegalyFromStrefaSkladowania(std::vector<Regal*>*, StrefaSkladowania* strefa); //bierze wskaznik na strefe zwraca wektor z wszystkimi regalami w tej strefie
 	//void DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal); //bierze dostawe i regal, nic nie zwraca (ew. bool'a)
+	//Dostawa * GetDostawa(int Kod);
+	//Regal * GetRegal(?String? Kod); 
+
 
 	//potrzebne do "Przesuniecie wewnatrzmagazynwoe"
+	//
 	//musisz zwróciæ dane o towar i zasoby, nie wiem jak to rozwiazac
 	//*GetZasobyFromStrefa(StrefaSkladowania * strefa)
 

@@ -92,7 +92,6 @@ namespace Project1 {
 			// checkedListBox2
 			// 
 			this->checkedListBox2->FormattingEnabled = true;
-			this->checkedListBox2->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Strefa A", L"Strefa B" });
 			this->checkedListBox2->Location = System::Drawing::Point(208, 24);
 			this->checkedListBox2->Margin = System::Windows::Forms::Padding(2);
 			this->checkedListBox2->Name = L"checkedListBox2";

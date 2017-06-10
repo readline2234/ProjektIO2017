@@ -70,11 +70,11 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem5 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
+			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
 				L"#REG41",
 					L"Laptopy", L"Lenovo", L"B50-70, i5-3220, 4GB, 500GB", L"20", L"5"
 			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem6 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
+			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(6) {
 				L"#REG41",
 					L"Klawiatury", L"HP", L"K45, membranowa, 216 klawiszy, czarna", L"24", L"15"
 			}, -1));
@@ -102,9 +102,9 @@ namespace Project1 {
 			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
 			this->listView1->FullRowSelect = true;
 			this->listView1->GridLines = true;
-			listViewItem5->StateImageIndex = 0;
-			listViewItem6->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem5, listViewItem6 });
+			listViewItem1->StateImageIndex = 0;
+			listViewItem2->StateImageIndex = 0;
+			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
 			this->listView1->Location = System::Drawing::Point(11, 73);
 			this->listView1->Margin = System::Windows::Forms::Padding(2);
 			this->listView1->MultiSelect = false;
@@ -191,7 +191,6 @@ namespace Project1 {
 			// 
 			this->comboBox1->AutoCompleteCustomSource->AddRange(gcnew cli::array< System::String^  >(2) { L"Strefa A", L"Strefa B" });
 			this->comboBox1->FormattingEnabled = true;
-			this->comboBox1->Items->AddRange(gcnew cli::array< System::Object^  >(2) { L"Strefa A", L"Strefa B" });
 			this->comboBox1->Location = System::Drawing::Point(13, 26);
 			this->comboBox1->Margin = System::Windows::Forms::Padding(2);
 			this->comboBox1->Name = L"comboBox1";

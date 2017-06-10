@@ -85,6 +85,7 @@ namespace Project1 {
 			this->button1->TabIndex = 15;
 			this->button1->Text = L"OK";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Dostawa2::button1_Click);
 			// 
 			// checkedListBox2
 			// 
@@ -149,6 +150,32 @@ private: System::Void button2_Click(System::Object^  sender, System::EventArgs^ 
 
 		// Use the IndexOf method to get the index of an item.
 		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
+	}
+
+}
+private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+	//OK
+	IEnumerator^ WybraneRegaly = checkedListBox2->CheckedItems->GetEnumerator();
+
+	int licznik = 0;
+	while (WybraneRegaly->MoveNext())
+	{
+		licznik++;
+	}
+
+	if (licznik >= 2)
+	{
+		MessageBox::Show("Wybrales wiecej niz 2 regaly - Popraw");
+	}
+	else
+	{	
+		Checked->Reset();
+		Checked->MoveNext();
+
+		
+		//musisz miec obiekty wybranych dostaw
+		// oraz obiekty wybranych regalow
+		//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
 	}
 
 }

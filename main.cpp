@@ -24,11 +24,11 @@ int main(void)
 	//MenuGlowne ^ menu = gcnew MenuGlowne();
 	//menu->ShowDialog();
 
-	//Dostawa1 ^ test = gcnew Dostawa1();
-	//test->ShowDialog();
-
-	Przesuniecie1 ^ test = gcnew Przesuniecie1();
+	Dostawa1 ^ test = gcnew Dostawa1();
 	test->ShowDialog();
+
+	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
+	//test->ShowDialog();
 
 	system("pause");
 	return 0;
