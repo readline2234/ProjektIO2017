@@ -77,6 +77,7 @@ namespace Project1 {
 			this->button2->TabIndex = 12;
 			this->button2->Text = L"Anuluj";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Dostawa1::button2_Click);
 			// 
 			// button1
 			// 
@@ -209,5 +210,9 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 }
 
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//ANULUJ
+	Dostawa1::Close();
+}
 };
 }

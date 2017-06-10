@@ -56,6 +56,7 @@ namespace Project1 {
 	private: System::Windows::Forms::Label^  label2;
 	private: System::Windows::Forms::Label^  label1;
 	private: System::Windows::Forms::ComboBox^  comboBox1;
+	private: System::Windows::Forms::Button^  button3;
 
 	private:
 		/// <summary>
@@ -90,6 +91,7 @@ namespace Project1 {
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
 			this->SuspendLayout();
 			// 
 			// listView1
@@ -197,11 +199,23 @@ namespace Project1 {
 			this->comboBox1->Size = System::Drawing::Size(176, 21);
 			this->comboBox1->TabIndex = 11;
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(207, 28);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(68, 19);
+			this->button3->TabIndex = 17;
+			this->button3->Text = L"Wyœwietl";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Przesuniecie1::button3_Click);
+			// 
 			// Przesuniecie1
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(567, 298);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->listView1);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
@@ -269,6 +283,11 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2();
 	przesuniecie2->ShowDialog();
+}
+private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+	//wyswietl
+
+	//comboBox1
 }
 };
 }

@@ -160,9 +160,13 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 			return;
 		}
 	}
+<<<<<<< HEAD
 	strcpy(buff, "UPDATE mydb.dostawa\
 	SET dostawa.Rozmeiszczona = b'1'\
 	WHERE dostawa.Kod = '");
+=======
+	strcpy(buff, "UPDATE mydb.dostawa SET dostawa.Rozmeiszczona = b'1' WHERE dostawa.Kod = '");
+>>>>>>> 5372bc127a1bd4552ab737c5f588c8e7ae891e22
 	strcat(buff, KodDostawy.c_str());
 	strcat(buff, "';");
 	status = mysql_query(mysqlConnection,buff);

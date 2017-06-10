@@ -159,33 +159,29 @@ namespace Project1 {
 
 		}
 
-		//std::vector<Regal*> vec;
-		//db->GetRegalyFromStrefaSkladowania(&vec, "A2");	//poprawka
-
 	}
 
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
 	//ANULUJ
-
+	Dostawa2::Close();
 	//Checked->Reset();
 	//Checked->MoveNext();
 
+	//while (Checked->MoveNext())
+	//{
+	//	Object^ itemChecked = safe_cast<Object^>(Checked->Current);
 
-	while (Checked->MoveNext())
-	{
-		Object^ itemChecked = safe_cast<Object^>(Checked->Current);
+	//	// Use the IndexOf method to get the index of an item.
+	//	MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
+	//}
 
-		// Use the IndexOf method to get the index of an item.
-		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
-	}
+	//while (Checked2->MoveNext())
+	//{
+	//	Object^ itemChecked = safe_cast<Object^>(Checked2->Current);
 
-	while (Checked2->MoveNext())
-	{
-		Object^ itemChecked = safe_cast<Object^>(Checked2->Current);
-
-		// Use the IndexOf method to get the index of an item.
-		MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
-	}
+	//	// Use the IndexOf method to get the index of an item.
+	//	MessageBox::Show(String::Concat("Item with title: \"", itemChecked, "\", is checked. Checked state is: ",  "."));
+	//}
 
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
@@ -241,13 +237,16 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 		//DOSTAWY	- vector - DostawaNazwaVec
 		//REGAL		- string - Regal
 
+	DataBaseConnector* db = DataBaseConnector::GetInstance();
+
 		for (int i = 0; i < DostawaNazwaVec.size(); i++)
 		{
-			//DodajDostaweDoRegalu(String KodDostawy, String KodRegalu)
+			db->DodajDostaweDoRegalu(DostawaNazwaVec[i], Regal);
 		}
 
 		//ewentualnie na obiektach:
 		//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
+		Dostawa2::Close();
 	}
 
 }
