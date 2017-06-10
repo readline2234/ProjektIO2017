@@ -80,7 +80,7 @@ void DataBaseConnector::GetDostawy(std::vector<Dostawa*>* vec)
 void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, std::string KodStrefa)
 {
 	char buff[200];
-	strcpy(buff, "SELECT regal.Kod, regal.Pojemnosc FROM strefa_skladowania JOIN regal ON(strefa_skladowania.ID = regal.Strefa_skladowania_ID) WHERE strefa_skladowania.Kod = '");
+	strcpy(buff, "SELECT regal.Kod, regal.Pojemnosc FROM mydb.strefa_skladowania JOIN mydb.regal ON(strefa_skladowania.ID = regal.Strefa_skladowania_ID) WHERE strefa_skladowania.Kod = '");
 	strcat(buff, KodStrefa.c_str());
 	strcat(buff, "';");
 	
@@ -103,7 +103,7 @@ void DataBaseConnector::GetRegalyFromStrefaSkladowania(std::vector<Regal*>*vec, 
 
 void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string KodRegalu)
 {
-	char dostawy[200];
+	/*char dostawy[200];
 	strcpy(dostawy, "SELECT dostawa.ID, dostawa.Towar_ID, dostawa.Ilosc FROM mydb.dostawa where dostawa.Kod = '");
 	strcat(dostawy, KodDostawy.c_str());
 	strcat(dostawy, "';");
@@ -127,7 +127,7 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		mysql_free_result(result);
 	}
 	char buff[500];
-	for (int i = 0; i < selectDostawy.size(); i++) {
+	/*for (int i = 0; i < selectDostawy.size(); i++) {
 		strcpy(buff, "INSERT INTO zasob(Towar_ID, Dostawa_ID, Regal_ID, Ilosc) VALUES(");
 		strcat(buff, selectDostawy[i][1]);//towar id
 		strcat(buff, ", ");
@@ -139,19 +139,19 @@ void DataBaseConnector::DodajDostaweDoRegalu(std::string KodDostawy, std::string
 		strcat(buff, ");");
 		mysql_query(mysqlConnection, buff);
 	}
-	this->Disconnect();
+	this->Disconnect();*/
 }
 
 MYSQL_RES* DataBaseConnector::GetResult(const char * SQL_QUERY)
 {
 	if (mysql_query(mysqlConnection, SQL_QUERY))
 	{
-		fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | SELECT");
+		fprintf(stderr, "ERROR: %s\n",SQL_QUERY);
 	}
 	else {
 		MYSQL_RES *result = mysql_store_result(mysqlConnection);
 		if (result == NULL)	{
-			fprintf(stderr, "ERROR IN: StrefaSkladowania ** DataBaseConnector::GetStrefySkladowania() | RESULT");
+			fprintf(stderr, "ERROR: RESULT\n");
 		}
 		else {
 			return result;

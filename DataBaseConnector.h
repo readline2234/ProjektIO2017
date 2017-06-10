@@ -6,6 +6,8 @@
 #include "StrefaSkladowania.h"
 #include "Dostawa.h"
 #include "Regal.h"
+
+#define _CRT_SECURE_NO_WARNINGS
 class DataBaseConnector
 {
 private: 

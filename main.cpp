@@ -18,6 +18,12 @@ int main(void)
 	{
 		std::cout << "Strefa: " << vec[i]->GetKod() << std::endl;
 	}
+	std::vector<Regal*> vec2;
+	db->GetRegalyFromStrefaSkladowania(&vec2,"A2");
+	for (int i = 0; i < vec2.size(); i++)
+	{
+		std::cout << "Regal: " << vec2[i]->GetKod() << std::endl;
+	}
 
 
 
