@@ -20,6 +20,9 @@ namespace Project1 {
 	public:
 
 		std::vector <int> * X;
+	private: System::Windows::Forms::Button^  button3;
+	private: System::Windows::Forms::CheckedListBox^  checkedListBox1;
+	public:
 		std::vector <std::string> * Y;
 
 		Przesuniecie2(std::vector <int> * x, std::vector <std::string> * y)
@@ -44,9 +47,9 @@ namespace Project1 {
 	protected:
 
 
-	private: System::Windows::Forms::ListView^  listView1;
-	private: System::Windows::Forms::ColumnHeader^  columnHeader1;
-	private: System::Windows::Forms::ColumnHeader^  columnHeader3;
+
+
+
 
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button1;
@@ -67,52 +70,14 @@ namespace Project1 {
 		/// </summary>
 		void InitializeComponent(void)
 		{
-			System::Windows::Forms::ListViewItem^  listViewItem1 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
-				L"#REG41",
-					L"20/100"
-			}, -1));
-			System::Windows::Forms::ListViewItem^  listViewItem2 = (gcnew System::Windows::Forms::ListViewItem(gcnew cli::array< System::String^  >(2) {
-				L"#REG42",
-					L"50/100"
-			}, -1));
-			this->listView1 = (gcnew System::Windows::Forms::ListView());
-			this->columnHeader1 = (gcnew System::Windows::Forms::ColumnHeader());
-			this->columnHeader3 = (gcnew System::Windows::Forms::ColumnHeader());
 			this->button2 = (gcnew System::Windows::Forms::Button());
 			this->button1 = (gcnew System::Windows::Forms::Button());
 			this->label2 = (gcnew System::Windows::Forms::Label());
 			this->label1 = (gcnew System::Windows::Forms::Label());
 			this->comboBox1 = (gcnew System::Windows::Forms::ComboBox());
+			this->button3 = (gcnew System::Windows::Forms::Button());
+			this->checkedListBox1 = (gcnew System::Windows::Forms::CheckedListBox());
 			this->SuspendLayout();
-			// 
-			// listView1
-			// 
-			this->listView1->AllowColumnReorder = true;
-			this->listView1->Columns->AddRange(gcnew cli::array< System::Windows::Forms::ColumnHeader^  >(2) { this->columnHeader1, this->columnHeader3 });
-			this->listView1->Cursor = System::Windows::Forms::Cursors::IBeam;
-			this->listView1->FullRowSelect = true;
-			listViewItem1->StateImageIndex = 0;
-			listViewItem2->StateImageIndex = 0;
-			this->listView1->Items->AddRange(gcnew cli::array< System::Windows::Forms::ListViewItem^  >(2) { listViewItem1, listViewItem2 });
-			this->listView1->Location = System::Drawing::Point(11, 73);
-			this->listView1->Margin = System::Windows::Forms::Padding(2);
-			this->listView1->MultiSelect = false;
-			this->listView1->Name = L"listView1";
-			this->listView1->Size = System::Drawing::Size(524, 191);
-			this->listView1->Sorting = System::Windows::Forms::SortOrder::Ascending;
-			this->listView1->TabIndex = 25;
-			this->listView1->UseCompatibleStateImageBehavior = false;
-			this->listView1->View = System::Windows::Forms::View::Details;
-			// 
-			// columnHeader1
-			// 
-			this->columnHeader1->Text = L"Rega³";
-			this->columnHeader1->Width = 375;
-			// 
-			// columnHeader3
-			// 
-			this->columnHeader3->Text = L"Pojemnosc";
-			this->columnHeader3->Width = 131;
 			// 
 			// button2
 			// 
@@ -133,6 +98,7 @@ namespace Project1 {
 			this->button1->TabIndex = 23;
 			this->button1->Text = L"OK";
 			this->button1->UseVisualStyleBackColor = true;
+			this->button1->Click += gcnew System::EventHandler(this, &Przesuniecie2::button1_Click);
 			// 
 			// label2
 			// 
@@ -164,12 +130,32 @@ namespace Project1 {
 			this->comboBox1->Size = System::Drawing::Size(176, 21);
 			this->comboBox1->TabIndex = 20;
 			// 
+			// button3
+			// 
+			this->button3->Location = System::Drawing::Point(207, 28);
+			this->button3->Margin = System::Windows::Forms::Padding(2);
+			this->button3->Name = L"button3";
+			this->button3->Size = System::Drawing::Size(68, 19);
+			this->button3->TabIndex = 26;
+			this->button3->Text = L"Wyœwietl";
+			this->button3->UseVisualStyleBackColor = true;
+			this->button3->Click += gcnew System::EventHandler(this, &Przesuniecie2::button3_Click);
+			// 
+			// checkedListBox1
+			// 
+			this->checkedListBox1->FormattingEnabled = true;
+			this->checkedListBox1->Location = System::Drawing::Point(12, 86);
+			this->checkedListBox1->Name = L"checkedListBox1";
+			this->checkedListBox1->Size = System::Drawing::Size(510, 154);
+			this->checkedListBox1->TabIndex = 27;
+			// 
 			// Przesuniecie2
 			// 
 			this->AutoScaleDimensions = System::Drawing::SizeF(6, 13);
 			this->AutoScaleMode = System::Windows::Forms::AutoScaleMode::Font;
 			this->ClientSize = System::Drawing::Size(567, 298);
-			this->Controls->Add(this->listView1);
+			this->Controls->Add(this->checkedListBox1);
+			this->Controls->Add(this->button3);
 			this->Controls->Add(this->button2);
 			this->Controls->Add(this->button1);
 			this->Controls->Add(this->label2);
@@ -199,5 +185,65 @@ namespace Project1 {
 			comboBox1->Items->Add(String::Format(result, 10));	//SK
 		}
 	}
+	private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
+		//WYSWIETL
+
+		checkedListBox1->Items->Clear();
+		DataBaseConnector* db = DataBaseConnector::GetInstance();
+
+		String^ strefa = comboBox1->Text;
+		msclr::interop::marshal_context context;
+		std::string sstrefa = context.marshal_as<std::string>(strefa);
+
+		std::vector<Regal*> vec;
+		db->GetRegalyFromStrefaSkladowania(&vec, sstrefa);	//poprawka
+
+		for (int i = 0; i < vec.size(); i++)
+		{
+			std::string bufor = vec[i]->GetKod();
+			String^ result;
+			result = marshal_as<String^>(bufor);
+
+			checkedListBox1->Items->Add(String::Format(result, 10));	//SK
+		}
+	}
+
+	private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
+
+		IEnumerator ^ Checked = checkedListBox1->CheckedItems->GetEnumerator();
+		Checked = checkedListBox1->CheckedItems->GetEnumerator();
+
+		int tickcount = 0;
+		while (Checked->MoveNext())
+		{
+			tickcount++;
+		}
+
+		if (tickcount >= 2)
+		{
+				MessageBox::Show("Wybrales wiecej niz 2 regaly - Popraw");
+		}
+		else
+		{
+			Checked->Reset();
+			Checked->MoveNext();
+
+			String ^  kod;
+			kod = Checked->Current->ToString();
+			msclr::interop::marshal_context context;
+			std::string Regal = context.marshal_as<std::string>(kod);
+
+			DataBaseConnector* db = DataBaseConnector::GetInstance();
+
+			for (int i = 0; i < X->size(); i++)
+			{
+				int ilosc = std::stoi(Y->at(i));
+
+					db->PrzesunZasobNaRegal(X->at(i), Regal, ilosc);
+			}
+		}
+
+
+	}
 };
-}
+	}
