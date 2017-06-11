@@ -269,8 +269,8 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 }
 private: System::Void button1_Click(System::Object^  sender, System::EventArgs^  e) {
 	//OK
-	std::vector <int> DoPrzekazania;
-	std::vector <int> ID;
+	std::vector <int> * ID = new std::vector <int>;
+	std::vector <std::string> * Ilosc = new std::vector <std::string>;
 
 	DataBaseConnector* db = DataBaseConnector::GetInstance();
 	std::vector<Zasob*> vecZas;
@@ -287,13 +287,13 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 		if (wartosc != "0")
 		{
-			DoPrzekazania.push_back(i);
-			ID.push_back(vecZas[i]->GetID());
+			ID->push_back(vecZas[i]->GetID());
+			Ilosc->push_back(wartosc);
 		}
 	}
 
 
-	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2();
+	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2(ID,Ilosc);
 	przesuniecie2->ShowDialog();
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {

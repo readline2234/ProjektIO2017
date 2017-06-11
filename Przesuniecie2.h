@@ -18,12 +18,15 @@ namespace Project1 {
 	public ref class Przesuniecie2 : public System::Windows::Forms::Form
 	{
 	public:
-		Przesuniecie2(void)
+
+		std::vector <int> * X;
+		std::vector <std::string> * Y;
+
+		Przesuniecie2(std::vector <int> * x, std::vector <std::string> * y)
 		{
 			InitializeComponent();
-			//
-			//TODO: Add the constructor code here
-			//
+			X = x;
+			Y = y;
 		}
 
 	protected:
@@ -44,9 +47,6 @@ namespace Project1 {
 	private: System::Windows::Forms::ListView^  listView1;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader1;
 	private: System::Windows::Forms::ColumnHeader^  columnHeader3;
-
-
-
 
 	private: System::Windows::Forms::Button^  button2;
 	private: System::Windows::Forms::Button^  button1;
