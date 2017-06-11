@@ -141,7 +141,7 @@ namespace Project1 {
 			this->Controls->Add(this->label2);
 			this->Controls->Add(this->label1);
 			this->Name = L"Dostawa1";
-			this->Text = L"Dostawa1";
+			this->Text = L"Dostawa - etap I";
 			this->Load += gcnew System::EventHandler(this, &Dostawa1::Dostawa1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -172,9 +172,11 @@ namespace Project1 {
 
 		for (int i = 0; i < vec2.size(); i++)
 		{
+			std::string bufor2;
 			std::string bufor = std::to_string(vec2[i]->GetKod());
+			bufor2 = bufor + "\t" + vec2[i]->GetData();
 			String^ result;
-			result = marshal_as<String^>(bufor);
+			result = marshal_as<String^>(bufor2);
 
 			checkedListBox1->Items->Add(String::Format(result, 10));	//SK
 		}

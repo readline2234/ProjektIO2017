@@ -40,7 +40,6 @@ int main(void)
 	//Przesuniecie1 ^ test = gcnew Przesuniecie1();
 	//test->ShowDialog();
 
-	system("pause");
 	return 0;
 }
 

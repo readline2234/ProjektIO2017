@@ -213,7 +213,7 @@ namespace Project1 {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->comboBox1);
 			this->Name = L"Przesuniecie1";
-			this->Text = L"Przesuniecie1";
+			this->Text = L"Przesuniecie - etap I";
 			this->Load += gcnew System::EventHandler(this, &Przesuniecie1::Przesuniecie1_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -259,7 +259,7 @@ private: System::Void listView1_MouseDoubleClick(System::Object^  sender, System
 
 	if (columnindex == 5)
 	{
-		Przesuniecie1Zmiana ^ przesuniecie1zmiana = gcnew Przesuniecie1Zmiana();
+		Przesuniecie1Zmiana ^ przesuniecie1zmiana = gcnew Przesuniecie1Zmiana(info->Item->SubItems[4]->Text);
 		przesuniecie1zmiana->ShowDialog();
 
 		number = przesuniecie1zmiana->GetNumber();

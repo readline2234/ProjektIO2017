@@ -120,7 +120,7 @@ namespace Project1 {
 			this->Controls->Add(this->checkedListBox2);
 			this->Controls->Add(this->label2);
 			this->Name = L"Dostawa2";
-			this->Text = L"Dostawa2";
+			this->Text = L"Dostawa - etap II";
 			this->Load += gcnew System::EventHandler(this, &Dostawa2::Dostawa2_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -198,15 +198,15 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 	if (licznik >= 2)
 	{
-		MessageBox::Show("Wybrales wiecej niz 2 regaly - Popraw");
+		MessageBox::Show("Wybrales wiecej niz 1 rega³.","B³¹d");
 	}
 
 #pragma endregion
 
 	else
-	{	
+	{
 
-	#pragma region //czesc odpowiedzialna za dostawy
+#pragma region //czesc odpowiedzialna za dostawy
 
 		Checked->Reset();
 
@@ -214,41 +214,57 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 		while (Checked->MoveNext())
 		{
-		String ^  kod;
-		kod = Checked->Current->ToString();
-		msclr::interop::marshal_context context;
-		std::string skod = context.marshal_as<std::string>(kod);
-		DostawaNazwaVec.push_back(skod);
+			String ^  kod;
+			kod = Checked->Current->ToString();
+			msclr::interop::marshal_context context;
+			std::string skod = context.marshal_as<std::string>(kod);
+			DostawaNazwaVec.push_back(skod);
 		}
 #pragma endregion
 
-	#pragma region //czesc odpowiedzialna za regaly
-		IEnumerator^ WybraneRegaly = checkedListBox2->CheckedItems->GetEnumerator();
-		WybraneRegaly->MoveNext();
-
-		String ^  kod;
-		kod = WybraneRegaly->Current->ToString();
-		msclr::interop::marshal_context context;
-		std::string Regal = context.marshal_as<std::string>(kod);
 
 
-#pragma endregion
+#pragma region //czesc odpowiedzialna za regaly
 
-		//DOSTAWY	- vector - DostawaNazwaVec
-		//REGAL		- string - Regal
-
-	DataBaseConnector* db = DataBaseConnector::GetInstance();
-
-		for (int i = 0; i < DostawaNazwaVec.size(); i++)
+		if (checkedListBox2->Items->Count == 0)
 		{
-			db->DodajDostaweDoRegalu(DostawaNazwaVec[i], Regal);
+			MessageBox::Show("Brak wybranych rega³ów.", "B³¹d");
 		}
+		else
+		{
+			IEnumerator^ WybraneRegaly = checkedListBox2->CheckedItems->GetEnumerator();
+			WybraneRegaly->MoveNext();
 
-		//ewentualnie na obiektach:
-		//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
-		Dostawa2::Close();
+			String ^  kod;
+
+			kod = WybraneRegaly->Current->ToString();
+
+			msclr::interop::marshal_context context;
+			std::string Regal = context.marshal_as<std::string>(kod);
+
+
+#pragma endregion
+
+			//DOSTAWY	- vector - DostawaNazwaVec
+			//REGAL		- string - Regal
+
+
+
+			DataBaseConnector* db = DataBaseConnector::GetInstance();
+
+			for (int i = 0; i < DostawaNazwaVec.size(); i++)
+			{
+				char bufor[20];
+				sscanf(DostawaNazwaVec[i].c_str(), "%s", bufor);
+
+				db->DodajDostaweDoRegalu(bufor, Regal);
+			}
+
+			//ewentualnie na obiektach:
+			//DodajDostaweDoRegalu(Dostawa * dostawa, Regal * regal)
+			Dostawa2::Close();
+		}
 	}
-
 }
 };
 }

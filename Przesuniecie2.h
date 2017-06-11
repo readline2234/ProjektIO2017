@@ -163,7 +163,7 @@ namespace Project1 {
 			this->Controls->Add(this->label1);
 			this->Controls->Add(this->comboBox1);
 			this->Name = L"Przesuniecie2";
-			this->Text = L"Przesuniecie2";
+			this->Text = L"Przesuniecie - etap II";
 			this->Load += gcnew System::EventHandler(this, &Przesuniecie2::Przesuniecie2_Load);
 			this->ResumeLayout(false);
 			this->PerformLayout();
@@ -222,29 +222,35 @@ namespace Project1 {
 
 		if (tickcount >= 2)
 		{
-				MessageBox::Show("Wybrales wiecej niz 2 regaly - Popraw");
+			MessageBox::Show("Wybrales wiecej niz 1 rega³.", "B³¹d");
 		}
 		else
 		{
-			Checked->Reset();
-			Checked->MoveNext();
-
-			String ^  kod;
-			kod = Checked->Current->ToString();
-			msclr::interop::marshal_context context;
-			std::string Regal = context.marshal_as<std::string>(kod);
-
-			DataBaseConnector* db = DataBaseConnector::GetInstance();
-
-			for (int i = 0; i < X->size(); i++)
+			if (checkedListBox1->Items->Count == 0)
 			{
-				int ilosc = std::stoi(Y->at(i));
+				MessageBox::Show("Brak wybranych rega³ów.", "B³¹d");
+			}
+			else
+			{
+				Checked->Reset();
+				Checked->MoveNext();
+
+				String ^  kod;
+				kod = Checked->Current->ToString();
+				msclr::interop::marshal_context context;
+				std::string Regal = context.marshal_as<std::string>(kod);
+
+				DataBaseConnector* db = DataBaseConnector::GetInstance();
+
+				for (int i = 0; i < X->size(); i++)
+				{
+					int ilosc = std::stoi(Y->at(i));
 
 					db->PrzesunZasobNaRegal(X->at(i), Regal, ilosc);
+				}
+			Przesuniecie2:Close();
 			}
-		Przesuniecie2:Close();
 		}
-
 
 	}
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {

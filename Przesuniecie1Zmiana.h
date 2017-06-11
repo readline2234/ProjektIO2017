@@ -19,15 +19,17 @@ namespace Project1 {
 	public:
 
 		String ^ number;
+		String ^ dostepnosc;
 
 		String ^ GetNumber()
 		{
 			return number;
 		}
 
-		Przesuniecie1Zmiana(void)
+		Przesuniecie1Zmiana(String ^ x)
 		{
 			InitializeComponent();
+			dostepnosc = x;
 			//
 			//TODO: Add the constructor code here
 			//
@@ -122,7 +124,25 @@ namespace Project1 {
 		//number = stoi(pole);
 
 		number = textBox1->Text;;
-		
+		try
+		{
+		__int32 numberi = System::Int32::Parse(number);
+		__int32 dostepnosci = System::Int32::Parse(dostepnosc);
+
+		if (numberi > dostepnosci)
+		{
+			numberi = dostepnosci;
+		}
+
+		std::string snumber = std::to_string(numberi);
+		number = gcnew System::String(snumber.c_str());
+		}
+		catch (System::Exception ^ e)
+		{
+			number = "0";
+		}
+
+
 		Przesuniecie1Zmiana::Close();
 	}
 	};
