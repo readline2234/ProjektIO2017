@@ -208,6 +208,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 	Dostawa2 ^ dostawa2 = gcnew Dostawa2(WybraneDostawy,WybraneStrefy);
 	dostawa2->ShowDialog();
 
+	Dostawa1::Close();
+
 }
 
 private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {

@@ -146,6 +146,7 @@ namespace Project1 {
 			this->button2->TabIndex = 15;
 			this->button2->Text = L"Anuluj";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Przesuniecie1::button2_Click);
 			// 
 			// button1
 			// 
@@ -295,6 +296,8 @@ private: System::Void button1_Click(System::Object^  sender, System::EventArgs^ 
 
 	Przesuniecie2 ^ przesuniecie2 = gcnew Przesuniecie2(ID,Ilosc);
 	przesuniecie2->ShowDialog();
+
+	Przesuniecie1::Close();
 }
 private: System::Void button3_Click(System::Object^  sender, System::EventArgs^  e) {
 	//wyswietl
@@ -357,6 +360,10 @@ private: System::Void button3_Click(System::Object^  sender, System::EventArgs^ 
 
 
 	//comboBox1
+}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//ANULUJ
+	Przesuniecie1::Close();
 }
 };
 }

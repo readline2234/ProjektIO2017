@@ -88,6 +88,7 @@ namespace Project1 {
 			this->button2->TabIndex = 24;
 			this->button2->Text = L"Anuluj";
 			this->button2->UseVisualStyleBackColor = true;
+			this->button2->Click += gcnew System::EventHandler(this, &Przesuniecie2::button2_Click);
 			// 
 			// button1
 			// 
@@ -241,9 +242,15 @@ namespace Project1 {
 
 					db->PrzesunZasobNaRegal(X->at(i), Regal, ilosc);
 			}
+		Przesuniecie2:Close();
 		}
 
 
 	}
+private: System::Void button2_Click(System::Object^  sender, System::EventArgs^  e) {
+	//ANULUJ
+	Przesuniecie2::Close();
+
+}
 };
 	}
